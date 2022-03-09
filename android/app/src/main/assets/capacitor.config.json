@@ -1,0 +1,6 @@
+{
+	"appId": "com.bruxemburg.srun",
+	"appName": "capApp",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
