@@ -1,4 +1,7 @@
 <script setup lang="ts">
+
+import IconEdgeLogo from "~icons/edge/logo"
+
 defineProps<{
   msg: string
 }>()
@@ -13,6 +16,7 @@ defineProps<{
       <a target="_blank" href="https://vuejs.org/">Vue 3</a>. What's next?
     </h3>
   </div>
+  <icon-edge-logo />
 </template>
 
 <style scoped>
