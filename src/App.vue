@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
+import VueIcon from '~icons/edge/logo'
+import HelloWorld from '~/components/HelloWorld.vue'
+import { isDark, toggleDark } from '~/composables/'
+
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <!--<img alt="Vue logo" class="logo" src="assets/icons/edge" width="125" height="125" />-->
+    <VueIcon class="logo" width="125" height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
@@ -15,13 +19,15 @@ import HelloWorld from '@/components/HelloWorld.vue'
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
+
+    <div @click="toggleDark()">toggle</div>
   </header>
 
   <RouterView />
 </template>
 
 <style>
-@import '@/assets/base.css';
+@import '~/assets/base.css';
 
 #app {
   max-width: 1280px;
@@ -29,6 +35,10 @@ import HelloWorld from '@/components/HelloWorld.vue'
   padding: 2rem;
 
   font-weight: normal;
+}
+html.dark > * {
+  background-color: black;
+  color: white;
 }
 
 header {
