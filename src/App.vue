@@ -15,12 +15,18 @@ import { isDark, toggleDark } from '~/composables/'
       <HelloWorld msg="You did it!" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">
+          Home
+        </RouterLink>
+        <RouterLink to="/about">
+          About
+        </RouterLink>
       </nav>
     </div>
 
-    <div @click="toggleDark()">toggle</div>
+    <div @click="toggleDark(isDark)">
+      toggle
+    </div>
   </header>
 
   <RouterView />
