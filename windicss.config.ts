@@ -30,8 +30,35 @@ export default defineConfig({
       },
       yellow: {
         100: '#F5BE2C',
-        25: '#F5BE2C',
+        25: '#FDEFCA',
       },
+    },
+    fontSize: {
+      'xs': '1em',
+      'sm': '1.125em',
+      'base': '1.25em',
+      'lg': '1.5em',
+      'xl': '2.25em',
+      '2xl': '2.625em',
+    },
+    fontFamily: {
+      sans: 'Euclid Circular A',
+    },
+    // not necessary but still
+    fontWeight: {
+      light: 300,
+      regular: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+    },
+    letterSpacing: {
+      normal: '-0.08em',
+      // character spacing -40
+      wide: '-0.04em',
+    },
+    lineHeight: {
+      normal: '1.25em',
     },
   },
 })

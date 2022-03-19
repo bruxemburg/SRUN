@@ -3,7 +3,7 @@ import path, { join } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import icons from 'unplugin-icons/vite'
+import Icons from 'unplugin-icons/vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 import WindiCSS from 'vite-plugin-windicss'
 
@@ -12,11 +12,10 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    icons({
-      compiler: 'vue3',
+    Icons({
       customCollections: {
-        edge: FileSystemIconLoader(
-          './src/assets/icons/edge',
+        srun: FileSystemIconLoader(
+          './public/assets/icons',
           svg => svg.replace(/^<svg /, '<svg fill="currentColor" '),
         ),
       },

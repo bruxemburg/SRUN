@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import WelcomeItem from '~/components/WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
 </script>
 
 <template>
   <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
+    <template #icon />
+    <template #heading>
+      Documentation
     </template>
-    <template #heading>Documentation</template>
 
     Vue’s
     <a target="_blank" href="https://vuejs.org/">official documentation</a>
@@ -20,10 +15,10 @@ import SupportIcon from './icons/IconSupport.vue'
   </WelcomeItem>
 
   <WelcomeItem>
-    <template #icon>
-      <ToolingIcon />
+    <template #icon />
+    <template #heading>
+      Tooling
     </template>
-    <template #heading>Tooling</template>
 
     This project is served and bundled with
     <a href="https://vitejs.dev/guide/features.html" target="_blank">Vite</a>. The recommended IDE
@@ -31,20 +26,18 @@ import SupportIcon from './icons/IconSupport.vue'
     <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>. If you need to test
     your components and web pages, check out
     <a href="https://www.cypress.io/" target="_blank">Cypress</a> and
-    <a href="https://docs.cypress.io/guides/component-testing/introduction" target="_blank"
-      >Cypress Component Testing</a
-    >.
+    <a href="https://docs.cypress.io/guides/component-testing/introduction" target="_blank">Cypress Component Testing</a>.
 
-    <br />
+    <br>
 
     More instructions are available in <code>README.md</code>.
   </WelcomeItem>
 
   <WelcomeItem>
-    <template #icon>
-      <EcosystemIcon />
+    <template #icon />
+    <template #heading>
+      Ecosystem
     </template>
-    <template #heading>Ecosystem</template>
 
     Get official tools and libraries for your project:
     <a target="_blank" href="https://pinia.vuejs.org/">Pinia</a>,
@@ -57,10 +50,10 @@ import SupportIcon from './icons/IconSupport.vue'
   </WelcomeItem>
 
   <WelcomeItem>
-    <template #icon>
-      <CommunityIcon />
+    <template #icon />
+    <template #heading>
+      Community
     </template>
-    <template #heading>Community</template>
 
     Got stuck? Ask your question on
     <a target="_blank" href="https://chat.vuejs.org">Vue Land</a>, our official Discord server, or
@@ -72,10 +65,10 @@ import SupportIcon from './icons/IconSupport.vue'
   </WelcomeItem>
 
   <WelcomeItem>
-    <template #icon>
-      <SupportIcon />
+    <template #icon />
+    <template #heading>
+      Support Vue
     </template>
-    <template #heading>Support Vue</template>
 
     As an independent project, Vue relies on community backing for its sustainability. You can help
     us by
