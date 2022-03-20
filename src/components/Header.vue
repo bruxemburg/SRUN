@@ -27,7 +27,7 @@ const header = ref(false)
 window.addEventListener('scroll', () => {
   header.value = isInViewport('relative-header-end')
 
-  const fixedHeader = document.querySelector('#fixed-header')
+  const fixedHeader: HTMLElement | null = document.querySelector('#fixed-header')
   if (fixedHeader == null)
     return
 

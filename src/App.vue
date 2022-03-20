@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+/* import { RouterLink, RouterView } from 'vue-router'
 import SampleView from './views/SampleView.vue'
-import AlarmView from './views/AlarmView.vue'
 import HelloWorld from '~/components/HelloWorld.vue'
-import { toggleDark } from '~/composables/'
+import { toggleDark } from '~/composables/' */
+import AlarmView from './views/AlarmView.vue'
 
 </script>
 
