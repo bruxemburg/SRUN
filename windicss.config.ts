@@ -40,6 +40,7 @@ export default defineConfig({
       'lg': '1.5em',
       'xl': '2.25em',
       '2xl': '2.625em',
+      '3xl': '3em',
     },
     fontFamily: {
       sans: 'Euclid Circular A',

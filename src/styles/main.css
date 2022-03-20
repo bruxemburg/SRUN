@@ -24,10 +24,6 @@ body {
 }
 
 header{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
   @apply bg-white dark:bg-black-100;
 }
 
@@ -36,11 +32,18 @@ main {
 }
 
 footer {
- position: absolute;
- bottom: 0;
- left: 0;
- width: 100vw;
- @apply bg-white dark:bg-black-100;
+  @apply bg-white dark:bg-black-100;
+}
+
+.container-blur {
+  @apply absolute top-0 left-0 -z-1 w-full h-full bg-white bg-opacity-90
+  backdrop-filter backdrop-blur-30 backdrop-brightness-100;
+}
+
+#fixed-header {
+  /*transform: translateY(-1em);*/
+  opacity: 0;
+  transition: opacity .15s ease-in-out;
 }
 
 h1 {

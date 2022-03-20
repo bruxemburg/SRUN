@@ -1,31 +1,27 @@
 <script setup lang="ts">
 import AlarmIcon from '~icons/srun/alarm'
+import HomeIcon from '~icons/srun/home'
+import BulbIcon from '~icons/srun/bulb'
+import SearchIcon from '~icons/srun/search'
 </script>
 
 <template>
   <footer>
-    <div
-      class="flex flex-row items-center w-full pt-0.5em pb-1em gap-1em
-      backdrop-filter bg-white dark:bg-black-100 px-2.625em
-      bg-opacity-90  backdrop-blur-30 backdrop-brightness-130"
-    >
-      <div class="bg-black-100 py-0.5em px-0.75em rounded-full">
-        <!--<AlarmIcon class="w-3.5em h-3.5em fill-white dark:fill-black-100" />-->
-        <div class="w-2.625em h-2.625em grid place-items-center">
-          <div class="bg-white rounded-full w-2.265em h-2.265em" />
-        </div>
-      </div>
-
-      <div class="bg-transparent py-0.5em px-0.75em rounded-full">
-        <div class="bg-black-5 rounded-full w-1.75em h-1.75em" />
-      </div>
-
-      <div class="bg-transparent py-0.5em px-0.75em rounded-full">
-        <div class="bg-black-5 rounded-full w-1.75em h-1.75em" />
-      </div>
-
-      <div class="bg-transparent py-0.5em px-0.75em rounded-full">
-        <div class="bg-black-5 rounded-full w-1.75em h-1.75em" />
+    <div class="fixed bottom-0 left-0 w-full">
+      <div class="container-blur" />
+      <!-- black thing -->
+      <!-- TODO: make this thing moving but dunno why -->
+      <div
+        class="absolute top-1/2 left-2.265em items-center
+      w-4.5em h-3/5 bg-black-100 rounded-full
+      transform -translate-y-1/2 -z-1"
+      />
+      <!-- actual tabbar -->
+      <div class="flex flex-row items-center justify-evenly w-full py-1.5em">
+        <AlarmIcon class="text-2xl text-white" />
+        <HomeIcon class="text-xl text-black-100" />
+        <BulbIcon class="text-xl text-black-100" />
+        <SearchIcon class="text-xl text-black-100" />
       </div>
     </div>
   </footer>

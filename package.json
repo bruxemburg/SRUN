@@ -13,6 +13,7 @@
     "@antfu/eslint-config": "^0.18.8",
     "@capacitor/android": "^3.4.3",
     "@vueuse/core": "^8.1.1",
+    "gsap": "^3.9.1",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14"
   },
