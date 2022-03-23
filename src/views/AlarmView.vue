@@ -1,22 +1,17 @@
 <script setup lang="ts">
 import Header from '~/components/Header.vue'
 import Footer from '~/components/TabBar.vue'
+import SortBar from '~/components/SortBar.vue'
+import Allarms from '~/components/Allarms.vue'
 
 </script>
 
 <template>
   <Header />
 
-  <main class="pt-1em">
-    <div class="h-screen bg-red-25">
-      main
-    </div>
-    <div class="h-screen bg-green-25">
-      main
-    </div>
-    <div class="h-screen bg-blue-25">
-      main
-    </div>
+  <main>
+    <SortBar class="py-1em" />
+    <Allarms class="py-1em" />
   </main>
 
   <Footer />
