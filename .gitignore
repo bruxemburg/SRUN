@@ -28,4 +28,4 @@ coverage
 *.sln
 *.sw?
 
-capacitor.config.ts
+/capacitor.config.ts
