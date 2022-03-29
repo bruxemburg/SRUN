@@ -11,7 +11,7 @@
     <div>
       <div class="p-1 border-t border-t-black-5 flex flex-row gap-x-1">
         <div class="rounded-full bg-blue-25 px-1.5625em py-1.1875em">
-          <img src="../../public/assets/emojis/sleeping-face.png">
+          <img src="/assets/emojis/sleeping-face.png">
         </div>
         <div class="flex flex-col items-center justify-center">
           <p>
