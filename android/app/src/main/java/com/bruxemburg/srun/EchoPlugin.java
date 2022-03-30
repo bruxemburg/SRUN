@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioAttributes;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -64,8 +65,8 @@ public class EchoPlugin extends Plugin {
     public void notify(PluginCall call) {
         Uri alarmTone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 
-        //Intent intent = new Intent(getContext(), MainActivity.class);
-        // PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_NO_CREATE);
+        Intent intent = new Intent(getContext(), AlarmPlugin.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder notificationBuilder = new Notification.Builder(getContext())
                 .setContentTitle(call.getString("title", "SRUN Wakeup"))
@@ -73,8 +74,8 @@ public class EchoPlugin extends Plugin {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true)
                 .setPriority(Notification.PRIORITY_HIGH)
-                .setSound(alarmTone);
-                // .setContentIntent(intent)
+                .setSound(alarmTone)
+                .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getContext()
                 .getSystemService(Context.NOTIFICATION_SERVICE);
@@ -91,6 +92,8 @@ public class EchoPlugin extends Plugin {
             channel.enableVibration(true);
             channel.setVibrationPattern(new long[] { 100, 200, 300, 400, 500, 400, 100, 300, 500});
             channel.setShowBadge(false);
+            channel.setSound(alarmTone, Notification.AUDIO_ATTRIBUTES_DEFAULT);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
             notificationBuilder.setChannelId(channelId);
             notificationManager.createNotificationChannel(channel);
         }
