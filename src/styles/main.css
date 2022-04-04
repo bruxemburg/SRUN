@@ -103,3 +103,41 @@ small {
     font-size: 21.024154589371985px;
   }
 }
+
+/* Andrew shit */
+.knobs{
+  @apply rounded-full h-full w-1.125em relative;
+}
+.knobs::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  background-color: white;
+  z-index: 1;
+  transition: 0.8s ease all, left .3s cubic-bezier(0.2, 1.35, 0.2, 1.35);
+  height: calc( 100% - 2px * 2 );
+  @apply rounded-full w-full;
+}
+.checkbox:active ~ .knobs::before {
+  transform: scaleX(0.5);
+  /*transform: scaleX(0.2);*/
+}
+.checkbox:checked ~ .knobs::before {
+  right: 2px;
+  left: calc(100% - 2px);
+}
+.layer{
+  @apply absolute w-full h-full rounded-full;
+}
+.layer::before{
+  content: '';
+  position: absolute;
+  z-index: 0;
+  @apply absolute w-full h-full rounded-full;
+  @apply bg-black-25;
+  transition: all ease 0.3s;
+}
+.checkbox:checked ~ .layer::before{
+  @apply bg-green-100;
+}
