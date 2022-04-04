@@ -4,6 +4,10 @@ import Footer from '~/components/TabBar.vue'
 import SortBar from '~/components/SortBar.vue'
 import Alarms from '~/components/Alarms.vue'
 
+/* function proverka() {
+  console.log('proverka')
+} */
+
 </script>
 
 <template>
