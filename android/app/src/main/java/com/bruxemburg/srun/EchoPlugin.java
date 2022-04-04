@@ -65,7 +65,7 @@ public class EchoPlugin extends Plugin {
     public void notify(PluginCall call) {
         Uri alarmTone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 
-        Intent intent = new Intent(getContext(), AlarmPlugin.class);
+        Intent intent = new Intent(getContext(), AlarmActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder notificationBuilder = new Notification.Builder(getContext())

@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.bruxemburg.srun.MainActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
@@ -23,6 +23,10 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".AlarmActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name=".AlarmReceiver" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
