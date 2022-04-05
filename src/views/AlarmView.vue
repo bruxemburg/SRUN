@@ -51,7 +51,7 @@ const notifyNotification = async(title: string, content: string) => {
 
 const setAlarm = async() => {
   await Alarm
-    .set()
+    .set({ hours: 11, minutes: 10 })
     .then((returned) => {
       val.value = returned.status
     })

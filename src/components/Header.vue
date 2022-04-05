@@ -54,7 +54,7 @@ window.addEventListener('scroll', () => {
 
 <template>
   <header>
-    <div id="relative-header" class="relative">
+    <div id="relative-header" class="relative pt-3.75em">
       <div
         class="flex flex-row items-center w-full mt-1em p-1em"
       >
@@ -78,7 +78,7 @@ window.addEventListener('scroll', () => {
       :data-animation-state="header ? 'show' : 'hide'"
       class="fixed top-0 left-0 w-full"
     >
-      <div class="flex flex-row items-center w-full p-1em pb-0.25em gap-x-1em justify-between">
+      <div class="flex flex-row items-center w-full pt-3.75em px-1em pb-0.25em gap-x-1em justify-between">
         <div class="container-blur" />
         <SearchIcon class="w-2.25em h-2.25em min-w-31.30434782608696px min-h-31.30434782608696px" @click="searchDialog()" />
         <!--TODO: Replace hardcoded values-->
