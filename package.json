@@ -12,6 +12,7 @@
   "dependencies": {
     "@antfu/eslint-config": "^0.18.8",
     "@capacitor/android": "^3.4.3",
+    "@capacitor/storage": "^1.2.5",
     "@vueuse/core": "^8.1.1",
     "gsap": "^3.9.1",
     "vue": "^3.2.31",
