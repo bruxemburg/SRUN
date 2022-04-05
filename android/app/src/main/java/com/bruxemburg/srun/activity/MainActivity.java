@@ -1,7 +1,9 @@
-package com.bruxemburg.srun;
+package com.bruxemburg.srun.activity;
 
 import android.os.Bundle;
 
+import com.bruxemburg.srun.plugin.AlarmPlugin;
+import com.bruxemburg.srun.plugin.EchoPlugin;
 import com.getcapacitor.BridgeActivity;
 import java.util.Arrays;
 

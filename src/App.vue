@@ -3,7 +3,25 @@
 import SampleView from './views/SampleView.vue'
 import HelloWorld from '~/components/HelloWorld.vue'
 import { toggleDark } from '~/composables/' */
+import { Capacitor } from '@capacitor/core'
+import { ref } from 'vue'
+
 import AlarmView from './views/AlarmView.vue'
+import HintComponent from './components/Hint.vue'
+
+// Hint component logic
+const triggered = ref(Capacitor.getPlatform() !== 'web')
+const body = document.querySelector<HTMLBodyElement>('body')!
+
+if (triggered.value)
+  body.classList.replace('overflow-hidden', 'overflow-auto')
+
+const overflow = () => {
+  triggered.value = true
+
+  if (body.classList.contains('overflow-hidden') && triggered.value)
+    body.classList.replace('overflow-hidden', 'overflow-auto')
+}
 
 </script>
 
@@ -11,6 +29,12 @@ import AlarmView from './views/AlarmView.vue'
   <!--<SampleView />-->
 
   <AlarmView />
+
+  <HintComponent
+    v-if="triggered === false"
+    :class="Capacitor.getPlatform() === 'web' ? 'block' : 'hidden'"
+    @click="overflow"
+  />
 
   <!--<header>
 

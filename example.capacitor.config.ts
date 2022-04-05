@@ -14,6 +14,7 @@ const config: CapacitorConfig = {
     cleartext: true,
   },
   hideLogs: false,
+  loggingBehavior: 'production',
 }
 
 export default config

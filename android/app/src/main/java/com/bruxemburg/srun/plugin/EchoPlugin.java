@@ -1,4 +1,4 @@
-package com.bruxemburg.srun;
+package com.bruxemburg.srun.plugin;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.widget.Toast;
 
+import com.bruxemburg.srun.R;
+import com.bruxemburg.srun.activity.AlarmActivity;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -66,6 +68,7 @@ public class EchoPlugin extends Plugin {
         Uri alarmTone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 
         Intent intent = new Intent(getContext(), AlarmActivity.class);
+        intent.putExtra("name", "Test alarm");
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder notificationBuilder = new Notification.Builder(getContext())
