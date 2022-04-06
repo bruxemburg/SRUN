@@ -3,7 +3,7 @@
 import SampleView from './views/SampleView.vue'
 import HelloWorld from '~/components/HelloWorld.vue'
 import { toggleDark } from '~/composables/' */
-import AlarmView from './views/AlarmView.vue'
+import AlarmView from './views/SettingsView.vue'
 
 </script>
 
