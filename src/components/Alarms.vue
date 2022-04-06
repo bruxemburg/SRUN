@@ -52,8 +52,6 @@ const {
 
 const editingMode = ref(false)
 
-const assetsPath = '../../public/assets/'
-
 function checkSortOption(alarm: any, by: string): boolean {
   if (by === 'all') return true
   else if (by === 'act' || by === 'dis')
@@ -98,7 +96,6 @@ const setAlarm = async() => {
       <div v-for="alarm in alarms" :key="alarm.id">
         <div v-if="checkSortOption(alarm, sortBy.id)" class="py-4 border-t border-t-black-5 flex flex-row w-full items-center">
           <div v-if="!editingMode" class="rounded-full-22px px-1.5625em py-1.1875em" :class="alarm.general.image.bg">
-            <!--<img :src="assetsPath+'emojis/'+alarm.general.image.ico+'.png'">-->
             <img :src="`./assets/emojis/${alarm.general.image.ico}.png`" alt="">
           </div>
           <div v-else class="rounded-full-22px px-1.25em py-0.875em bg-red-25">
@@ -112,7 +109,7 @@ const setAlarm = async() => {
               {{ alarm.general.label }}  •  {{ alarm.general.alarmtime }}
             </small>
           </div>
-          <div v-if="!editingMode" class="toggle flex w-2.3125em h-1.375em ml-auto rounded-full relative">
+          <div v-if="!editingMode" class="flex w-2.5em h-1.625em ml-auto rounded-full relative">
             <input type="checkbox" class="checkbox opacity-0 w-full h-full absolute z-2" :checked="alarm.enabled" @click="setAlarm">
             <div class="knobs" />
             <div class="layer" />
@@ -137,8 +134,9 @@ const setAlarm = async() => {
     background-color: white;
     z-index: 1;
     transition: 0.8s ease all, left .3s cubic-bezier(0.2, 1.35, 0.2, 1.35);
-    height: calc( 100% - 2px * 2 );
-    @apply rounded-full w-full;
+    height: 1.375em;
+    width: 1.375em;
+    @apply rounded-full;
   }
 
   .checkbox:active ~ .knobs::before {
@@ -159,8 +157,7 @@ const setAlarm = async() => {
     content: '';
     position: absolute;
     z-index: 0;
-    @apply absolute w-full h-full rounded-full;
-    @apply bg-black-25;
+    @apply absolute w-full h-full rounded-full bg-black-25;
     transition: all ease 0.3s;
   }
 

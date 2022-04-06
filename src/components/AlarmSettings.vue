@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import router from '~/router'
 
 interface Props {
@@ -34,6 +35,7 @@ const {
   alarm = { id: -1 },
 } = defineProps<Props>()
 if (alarm.id === -1) router.push('/alarms')
+
 </script>
 <template>
   Hello from AlarmSettings {{ alarm.id }}!
