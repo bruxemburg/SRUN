@@ -1,12 +1,12 @@
 <script setup lang="ts">
-/* import { RouterLink, RouterView } from 'vue-router'
-import SampleView from './views/SampleView.vue'
-import HelloWorld from '~/components/HelloWorld.vue'
-import { toggleDark } from '~/composables/' */
+import { RouterView } from 'vue-router'
+// import SampleView from './views/SampleView.vue'
+// import HelloWorld from '~/components/HelloWorld.vue'
+// import { toggleDark } from '~/composables/'
 import { Capacitor } from '@capacitor/core'
 import { ref } from 'vue'
 
-import AlarmView from './views/AlarmView.vue'
+// import AlarmView from './views/AlarmView.vue'
 import HintComponent from './components/Hint.vue'
 
 // Hint component logic
@@ -28,12 +28,13 @@ const overflow = () => {
 <template>
   <!--<SampleView />-->
 
-  <AlarmView />
+  <RouterView/>
 
   <HintComponent
     v-if="triggered === false"
     :class="Capacitor.getPlatform() === 'web' ? 'block' : 'hidden'"
     @click="overflow"
+    class="z-99"
   />
 
   <!--<header>
