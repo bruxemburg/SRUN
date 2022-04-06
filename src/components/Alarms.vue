@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { PluginResultError } from '@capacitor/core'
+import Alarm from '~/composables/alarm-plugin'
 
 import TrashIcon from '~icons/srun/trashbin'
 import CaretIcon from '~icons/srun/caret'
@@ -48,67 +50,9 @@ const {
   alarms = [],
 } = defineProps<Props>()
 
-// const sortBy = ref('rec')
-// sortBy.value = props.sortBy
-
-/* const alarms = ref([
-  {
-    id: 0,
-    title: '145  |  Paldiski-Tallinn',
-    transport: 'Bus',
-    time: '7:49 AM',
-    enabled: true,
-    tags: ['freq'],
-  },
-  {
-    id: 1,
-    title: '512  |  Paldiski-Tallinn',
-    transport: 'Morning train',
-    time: '7:49 AM',
-    enabled: false,
-    tags: ['freq'],
-  },
-  {
-    id: 2,
-    title: '4  |  Tondi-Lennujaam',
-    transport: 'Tram',
-    time: '7:49 AM',
-    enabled: false,
-    tags: ['rec'],
-  },
-  {
-    id: 3,
-    title: 'Keep me awake in car',
-    transport: 'Car',
-    time: 'Every 10 min',
-    enabled: false,
-    tags: ['freq', 'rec'],
-  },
-]) */
-
 const editingMode = ref(false)
 
 const assetsPath = '../../public/assets/'
-
-// const emojiList = ['sleeping-face.png', 'relieved-face.png', 'sleepy-face.png', 'yawning-face.png']
-/* function getRandomEmoji() {
-  return `${assetsPath}emojis/${emojiList[Math.floor(Math.random() * emojiList.length)]}`
-} */
-
-// const colorList = ['bg-blue-25', 'bg-red-25', 'bg-green-25', 'bg-yellow-25']
-/* function getRandomColor() {
-  return colorList[Math.floor(Math.random() * colorList.length)]
-} */
-
-/* const tempShit = [{ cartBg: '', cartIco: '' }]
-alarms.forEach((element) => {
-  tempShit.push({ cartBg: getRandomColor(), cartIco: getRandomEmoji() })
-}) */
-
-/* function openSettings() {
-  console.log('openSettings')
-  // router.push('/settings')
-} */
 
 function checkSortOption(alarm: any, by: string): boolean {
   if (by === 'all') return true
@@ -116,6 +60,21 @@ function checkSortOption(alarm: any, by: string): boolean {
     return alarm.enabled === (by === 'act')
   else
     return alarm.tags.includes(by)
+}
+
+// set alarm quick solution
+const setAlarm = async() => {
+  const now = new Date()
+  const date = new Date(now.setMinutes(now.getMinutes() + 2))
+
+  await Alarm
+    .set({ date: date.getTime(), name: 'My alarm' })
+    .then((returned) => {
+      console.log(returned.status)
+    })
+    .catch((error: PluginResultError) => {
+      console.error(error.message)
+    })
 }
 
 </script>
@@ -139,7 +98,8 @@ function checkSortOption(alarm: any, by: string): boolean {
       <div v-for="alarm in alarms" :key="alarm.id">
         <div v-if="checkSortOption(alarm, sortBy.id)" class="py-4 border-t border-t-black-5 flex flex-row w-full items-center">
           <div v-if="!editingMode" class="rounded-full-22px px-1.5625em py-1.1875em" :class="alarm.general.image.bg">
-            <img :src="assetsPath+'emojis/'+alarm.general.image.ico+'.png'">
+            <!--<img :src="assetsPath+'emojis/'+alarm.general.image.ico+'.png'">-->
+            <img :src="`./assets/emojis/${alarm.general.image.ico}.png`" alt="">
           </div>
           <div v-else class="rounded-full-22px px-1.25em py-0.875em bg-red-25">
             <TrashIcon class="text-red-100 w-2.625em h-2.625em" />
@@ -153,7 +113,7 @@ function checkSortOption(alarm: any, by: string): boolean {
             </small>
           </div>
           <div v-if="!editingMode" class="toggle flex w-2.3125em h-1.375em ml-auto rounded-full relative">
-            <input type="checkbox" class="checkbox opacity-0 w-full h-full absolute z-2" :checked="alarm.enabled">
+            <input type="checkbox" class="checkbox opacity-0 w-full h-full absolute z-2" :checked="alarm.enabled" @click="setAlarm">
             <div class="knobs" />
             <div class="layer" />
           </div>
@@ -164,41 +124,48 @@ function checkSortOption(alarm: any, by: string): boolean {
   </div>
 </template>
 
-<style>
-.knobs{
-  @apply rounded-full h-full w-1.125em relative;
-}
-.knobs::before {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 2px;
-  background-color: white;
-  z-index: 1;
-  transition: 0.8s ease all, left .3s cubic-bezier(0.2, 1.35, 0.2, 1.35);
-  height: calc( 100% - 2px * 2 );
-  @apply rounded-full w-full;
-}
-.checkbox:active ~ .knobs::before {
-  transform: scaleX(0.5);
-  /*transform: scaleX(0.2);*/
-}
-.checkbox:checked ~ .knobs::before {
-  /*right: 2px;*/
-  left: calc(100% - 2px);
-}
-.layer{
-  @apply absolute w-full h-full rounded-full;
-}
-.layer::before{
-  content: '';
-  position: absolute;
-  z-index: 0;
-  @apply absolute w-full h-full rounded-full;
-  @apply bg-black-25;
-  transition: all ease 0.3s;
-}
-.checkbox:checked ~ .layer::before{
-  @apply bg-green-100;
-}
+<style scoped>
+  .knobs{
+    @apply rounded-full h-full w-1.125em relative;
+  }
+
+  .knobs::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    background-color: white;
+    z-index: 1;
+    transition: 0.8s ease all, left .3s cubic-bezier(0.2, 1.35, 0.2, 1.35);
+    height: calc( 100% - 2px * 2 );
+    @apply rounded-full w-full;
+  }
+
+  .checkbox:active ~ .knobs::before {
+    transform: scaleX(0.5);
+    /*transform: scaleX(0.2);*/
+  }
+
+  .checkbox:checked ~ .knobs::before {
+    /*right: 2px;*/
+    left: calc(100% - 2px);
+  }
+
+  .layer{
+    @apply absolute w-full h-full rounded-full;
+  }
+
+  .layer::before{
+    content: '';
+    position: absolute;
+    z-index: 0;
+    @apply absolute w-full h-full rounded-full;
+    @apply bg-black-25;
+    transition: all ease 0.3s;
+  }
+
+  .checkbox:checked ~ .layer::before{
+    @apply bg-green-100;
+  }
+
 </style>

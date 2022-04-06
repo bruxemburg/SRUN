@@ -1,0 +1,12 @@
+{
+	"appId": "com.bruxemburg.srun",
+	"appName": "SRUN",
+	"webDir": "dist",
+	"bundledWebRuntime": false,
+	"server": {
+		"url": "http://10.140.142.13:4000",
+		"cleartext": true
+	},
+	"hideLogs": false,
+	"loggingBehavior": "production"
+}

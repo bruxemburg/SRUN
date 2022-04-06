@@ -37,57 +37,8 @@ const sortOptions = [
   },
 ]
 
-/* const alarms = [
-  {
-    id: 0,
-    body: {
-      title: '145  |  Paldiski-Tallinn',
-      transport: 'Bus',
-      time: '7:49 AM',
-    },
-    enabled: true,
-    tags: ['freq'],
-  },
-  {
-    id: 1,
-    body: {
-      title: '512  |  Paldiski-Tallinn',
-      transport: 'Morning train',
-      time: '7:49 AM',
-    },
-    enabled: false,
-    tags: ['freq'],
-  },
-  {
-    id: 2,
-    body: {
-      title: '4  |  Tondi-Lennujaam',
-      transport: 'Tram',
-      time: '7:49 AM',
-    },
-    enabled: false,
-    tags: ['rec'],
-  },
-  {
-    id: 3,
-    body: {
-      title: 'Keep me awake in car',
-      transport: 'Car',
-      time: 'Every 10 min',
-    },
-    enabled: false,
-    tags: ['freq', 'rec'],
-  },
-] */
 const alarms = alarmsJson
 alarms.sort((a, b) => { return a.id - b.id })
-/* const alarms = Object.keys(alarmsJson).sort().reduce(
-  (obj, key) => {
-    obj[key] = alarms[key]
-    return obj
-  },
-  {},
-) */
 
 function sortSetUp(by: string): void {
   for (let i = 0; i < sortOptions.length; i++) {

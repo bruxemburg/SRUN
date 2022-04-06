@@ -28,6 +28,4 @@ coverage
 *.sln
 *.sw?
 
-### Builds ignore
-android
-ios
+/capacitor.config.ts

@@ -1,7 +1,9 @@
 <script setup lang="ts">
-/* import { ref } from 'vue' */
+// import { ref } from 'vue' 
 
-const emits = defineEmits(['sort-set-up'])
+const emits = defineEmits<{
+  (e: 'sort-set-up', by: string): void
+}>()
 
 interface Props {
   sortBy: {
@@ -22,44 +24,6 @@ const {
     },
   ],
 } = defineProps<Props>()
-
-/* const options = ref([
-  {
-    id: 'rec',
-    title: 'Recent',
-    enabled: true,
-  },
-  {
-    id: 'freq',
-    title: 'Frequent',
-    enabled: false,
-  },
-  {
-    id: 'act',
-    title: 'Active',
-    enabled: false,
-  },
-  {
-    id: 'dis',
-    title: 'Disabled',
-    enabled: false,
-  },
-  {
-    id: 'all',
-    title: 'All',
-    enabled: false,
-  },
-]) */
-
-/* function sortBy(key: string) {
-  sortOptions.value.forEach((element) => {
-    if (element.id === key) {
-      element.enabled = true
-      emits('sort-set-up', key)
-    }
-    else { element.enabled = false }
-  })
-} */
 
 </script>
 
