@@ -1,0 +1,22 @@
+[
+  {
+    "id": "rec",
+    "label": "Recent"
+  },
+  {
+    "id": "freq",
+    "label": "Frequent"
+  },
+  {
+    "id": "act",
+    "label": "Active"
+  },
+  {
+    "id": "dis",
+    "label": "Disabled"
+  },
+  {
+    "id": "all",
+    "label": "All"
+  }
+]

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 import alarmsJson from '../alarms.json'
+import tagsJson from '../tags.json'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/TabBar.vue'
 import SortBar from '~/components/SortBar.vue'
@@ -10,11 +9,15 @@ import router from '~/router'
 
 // import AlarmSettings from '~/components/AlarmSettings.vue'
 
-const settingsView = ref(false)
-const interactableAlarm = ref(-1)
+const settingsView = $ref(false)
+const interactableAlarm = $ref(-1)
 
-const sortBy = ref({ id: 'rec', title: 'Recent' })
-const sortOptions = [
+const sortOptions = tagsJson
+// const firstEl = sortOptions[1]
+// const sortBy = $ref(sortOptions[1]) // this shit does magic
+// console.log(sortOptions[1])
+const sortBy = $ref({ id: 'rec', title: 'Recent' })
+/* const sortOptions = [
   {
     id: 'rec',
     title: 'Recent',
@@ -35,7 +38,7 @@ const sortOptions = [
     id: 'all',
     title: 'All',
   },
-]
+] */
 
 const alarms = alarmsJson
 alarms.sort((a, b) => { return a.id - b.id })
@@ -43,8 +46,11 @@ alarms.sort((a, b) => { return a.id - b.id })
 function sortSetUp(by: string): void {
   for (let i = 0; i < sortOptions.length; i++) {
     if (sortOptions[i].id === by) {
-      sortBy.value.id = by
-      sortBy.value.title = sortOptions[i].title
+      sortBy.id = by
+      sortBy.label = sortOptions[i].label
+      /* console.log(sortBy)
+      console.log(sortOptions)
+      console.log(tagsJson) */
       return
     }
   }
@@ -58,10 +64,10 @@ function interactions(interactable: string, interaction: string, ...args: any[])
       if (typeof alarmId !== 'number') return console.log('alarmId is not a number')
       if (!alarms.map(alarm => alarm.id).includes(alarmId)) return console.log('alarmId is not a valid alarm id')
       router.push(`/alarm/${alarmId}`)
-      interactableAlarm.value = alarmId
-      settingsView.value = true
+      interactableAlarm = alarmId
+      settingsView = true
     }
-    else { settingsView.value = false }
+    else { settingsView = false }
   }
 }
 

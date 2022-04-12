@@ -1,28 +1,18 @@
 <script setup lang="ts">
-// import { ref } from 'vue' 
+// import { ref } from 'vue'
+import type { Tag } from '~/composables/alarmModel.ts'
 
 const emits = defineEmits<{
   (e: 'sort-set-up', by: string): void
 }>()
 
 interface Props {
-  sortBy: {
-    id: string
-    title: string
-  }
-  sortOptions: {
-    id: string
-    title: string
-  }[]
+  sortBy: Tag
+  sortOptions: Tag[]
 }
 const {
-  sortBy = [{ id: 'all', title: 'All' }],
-  sortOptions = [
-    {
-      id: 'all',
-      title: 'All',
-    },
-  ],
+  sortBy,
+  sortOptions,
 } = defineProps<Props>()
 
 </script>
@@ -32,12 +22,12 @@ const {
     <div v-for="option in sortOptions" :key="option.id">
       <div v-if="option.id == sortBy.id" class="py-0.625em px-1.25em rounded-full bg-black-100 text-white" @click="emits('sort-set-up', option.id)">
         <p class="font-300">
-          {{ option.title }}
+          {{ option.label }}
         </p>
       </div>
       <div v-else class="py-0.625em px-1.25em rounded-full bg-black-5 text-black-100e" @click="emits('sort-set-up', option.id)">
         <p class="font-300">
-          {{ option.title }}
+          {{ option.label }}
         </p>
       </div>
     </div>

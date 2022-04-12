@@ -2,108 +2,164 @@
   {
     "id": 0,
     "enabled": true,
-    "tags": ["freq"],
-    "general": {
-      "transport": "bus",
-      "route": "145  |  Paldiski-Tallinn",
-      "station": "Vabaduse Väljak",
-      "alarmtime": -5,
-      "label": "Bus",
-      "image": {
-        "ico": "sleeping-face",
-        "bg": "bg-blue-25"
+    "tags": [{
+      "id": "freq",
+      "label": "Frequent"
+    }],
+    "settings": {
+      "general": {
+        "transport": "bus",
+        "route": -1,
+        "station": -1,
+        "alarmtime": -5,
+        "label": "Bus",
+        "image": {
+          "ico": "sleeping-face",
+          "bg": "bg-blue-25"
+        }
+      },
+      "options": {
+        "repeat": ["mon", "fri"],
+        "snooze": false,
+        "snooze_time": 0
+      },
+      "sound": {
+        "enabled": true,
+        "file": "sounds/Radar.wav",
+        "volume": 100
+      },
+      "motion": {
+        "enabled": true,
+        "pattern": {
+          "id": "bass.wav",
+          "label": "Sound's bass"
+        },
+        "intensity": 9
       }
-    },
-    "options": {
-      "repeat": ["mon", "fri"],
-      "snooze": false,
-      "snooze_time": 0
-    },
-    "sound": {
-      "enabled": true,
-      "file": "sounds/Radar.wav",
-      "volume": 100
     },
     "expiration": 0
   },
   {
     "id": 1,
     "enabled": false,
-    "tags": ["freq"],
-    "general": {
-      "transport": "train",
-      "route": "512  |  Paldiski-Tallinn",
-      "station": "Vabaduse Väljak",
-      "alarmtime": -5,
-      "label": "Morning train",
-      "image": {
-        "ico": "relieved-face",
-        "bg": "bg-red-25"
+    "tags": [{
+      "id": "freq",
+      "label": "Frequent"
+    }],
+    "settings": {
+      "general": {
+        "transport": "train",
+        "route": -1,
+        "station": -1,
+        "alarmtime": -5,
+        "label": "Morning train",
+        "image": {
+          "ico": "relieved-face",
+          "bg": "bg-red-25"
+        }
+      },
+      "options": {
+        "repeat": ["mon", "fri"],
+        "snooze": false,
+        "snooze_time": 0
+      },
+      "sound": {
+        "enabled": true,
+        "file": "sounds/Radar.wav",
+        "volume": 100
+      },
+      "motion": {
+        "enabled": true,
+        "pattern": {
+          "id": "default2.wav",
+          "label": "Default 2"
+        },
+        "intensity": 2
       }
-    },
-    "options": {
-      "repeat": ["mon", "fri"],
-      "snooze": false,
-      "snooze_time": 0
-    },
-    "sound": {
-      "enabled": true,
-      "file": "sounds/Radar.wav",
-      "volume": 100
     },
     "expiration": 0
   },
   {
     "id": 2,
     "enabled": false,
-    "tags": ["rec"],
-    "general": {
-      "transport": "tram",
-      "route": "4  |  Tondi-Lennujaam",
-      "station": "Vabaduse Väljak",
-      "alarmtime": -5,
-      "label": "Tram",
-      "image": {
-        "ico": "sleepy-face",
-        "bg": "bg-green-25"
+    "tags": [{
+      "id": "rec",
+      "label": "Recent"
+    }],
+    "settings": {
+      "general": {
+        "transport": "tram",
+        "route": -1,
+        "station": -1,
+        "alarmtime": -5,
+        "label": "Tram",
+        "image": {
+          "ico": "sleepy-face",
+          "bg": "bg-green-25"
+        }
+      },
+      "options": {
+        "repeat": ["mon", "fri"],
+        "snooze": false,
+        "snooze_time": 0
+      },
+      "sound": {
+        "enabled": true,
+        "file": "sounds/Radar.wav",
+        "volume": 100
+      },
+      "motion": {
+        "enabled": true,
+        "pattern": {
+          "id": "brrr.wav",
+          "label": "Brrr"
+        },
+        "intensity": 100
       }
-    },
-    "options": {
-      "repeat": ["mon", "fri"],
-      "snooze": false,
-      "snooze_time": 0
-    },
-    "sound": {
-      "enabled": true,
-      "file": "sounds/Radar.wav",
-      "volume": 100
     },
     "expiration": 0
   },
   {
     "id": 3,
     "enabled": false,
-    "tags": ["rec", "freq"],
-    "general": {
-      "transport": "car",
-      "route": "Keep me awake in car",
-      "station": "Vabaduse Väljak",
-      "alarmtime": 10,
-      "label": "Every 10 min",
-      "image": {
-        "ico": "yawning-face",
-        "bg": "bg-yellow-25"
+    "tags": [{
+      "id": "rec",
+      "label": "Recent"
+    },
+    {
+      "id": "freq",
+      "label": "Frequent"
+    }],
+    "settings": {
+      "general": {
+        "transport": "car",
+        "route": -1,
+        "station": -1,
+        "alarmtime": 10,
+        "label": "Every 10 min",
+        "image": {
+          "ico": "yawning-face",
+          "bg": "bg-yellow-25"
+        }
+      },
+      "options": {
+        "repeat": ["mon", "fri"],
+        "snooze": false,
+        "snooze_time": 0
+      },
+      "sound": {
+        "enabled": true,
+        "file": "sounds/Radar.wav",
+        "volume": 100
+      },
+      "motion": {
+        "enabled": true,
+        "pattern": {
+          "id": "bruh.wav",
+          "label": "bruh"
+        },
+        "intensity": 8
       }
-    },
-    "options": {
-      "repeat": ["mon", "fri"],
-      "snooze": false,
-      "snooze_time": 0
-    },
-    "sound": {
-      "enabled": true,
-      "file": "sounds/Radar.wav",
-      "volume": 100
     },
     "expiration": 0
   }

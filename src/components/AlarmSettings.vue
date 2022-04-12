@@ -1,42 +1,191 @@
 <script setup lang="ts">
-
+import ToggleButton from './ToggleButton.vue'
 import router from '~/router'
+import CaretIcon from '~icons/srun/caret'
+import type { Settings } from '~/composables/alarmModel.ts'
+
+const emits = defineEmits<{
+  (event: 'interaction', ibl: string, ion: string, ...args: any[]): void
+}>()
 
 interface Props {
-  alarm: {
-    id: number
-    enabled: boolean
-    tags: string[]
-    general: {
-      transport: string
-      route: string
-      station: string
-      alarmtime: number
-      label: string
-      image: {
-        ico: string
-        bg: string
-      }
-    }
-    options: {
-      repeat: string[]
-      snooze: boolean
-      snooze_time: number
-    }
-    sound: {
-      enabled: boolean
-      file: string
-      volume: number
-    }
-    expiration: number
-  }
+  settings: Settings
 }
 const {
-  alarm = { id: -1 },
+  settings,
 } = defineProps<Props>()
-if (alarm.id === -1) router.push('/alarms')
+// id: -1
+// if (alarm.id === -1) router.push('/alarms')
 
 </script>
 <template>
-  Hello from AlarmSettings {{ alarm.id }}!
+  <div class="items-center w-full py-1em">
+    <div class="mt-2em">
+      <h1 class="ml-auto mr-auto text-base text-black-60 font-100">
+        General
+      </h1>
+      <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
+      <div class="option">
+        <p class="mr-auto ml-0 text-base font-medium">
+          Route
+        </p>
+        <button class="ml-auto mr-0 text-black-60 flex items-center" @click="emits('interaction', 'route')">
+          <p class="font-100 text-sm">
+            {{ settings.general.route }}
+          </p>
+          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+        </button>
+      </div>
+      <div class="option">
+        <p class="mr-auto ml-0 text-base font-medium">
+          Stop
+        </p>
+        <button class="ml-auto mr-0 text-black-60 flex items-center">
+          <p class="font-100 text-sm">
+            {{ settings.general.station }}
+          </p>
+          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+        </button>
+      </div>
+      <div class="option">
+        <p class="mr-auto ml-0 text-base font-medium">
+          Wake up before
+        </p>
+        <button class="ml-auto mr-0 text-black-60 flex items-center">
+          <p class="font-100 text-sm">
+            {{ Math.abs(settings.general.alarmtime) + ' minutes' }}
+          </p>
+          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+        </button>
+      </div>
+      <div class="option">
+        <p class="mr-auto ml-0 text-base font-medium">
+          Label
+        </p>
+        <button class="ml-auto mr-0 text-black-60 flex items-center">
+          <p class="font-100 text-sm">
+            {{ settings.general.label }}
+          </p>
+          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+        </button>
+      </div>
+    </div>
+    <div class="mt-2em">
+      <h1 class="ml-auto mr-auto text-base text-black-60 font-100">
+        Options
+      </h1>
+      <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
+      <div />
+      <div class="option">
+        <p class="mr-auto ml-0 text-base font-medium">
+          Repeat
+        </p>
+        <button class="ml-auto mr-0 text-black-60 flex items-center">
+          <p class="font-100 text-sm">
+            <!-- TODO: make a function that will translate it into Peoplish -->
+            {{ settings.options.repeat.length === 0 ? 'Once' : settings.options.repeat.join(', ') }}
+          </p>
+          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+        </button>
+      </div>
+      <div class="option">
+        <p class="mr-auto ml-0 text-base font-medium">
+          Snooze
+        </p>
+        <ToggleButton :checked="settings.options.snooze" @click="emits('interaction', 'snooze', 'toggle')" />
+      </div>
+      <div v-if="settings.options.snooze">
+        <div class="option">
+          <p class="mr-auto ml-0 text-base font-medium">
+            Snooze time
+          </p>
+          <button class="ml-auto mr-0 text-black-60 flex items-center">
+            <p class="font-100 text-sm">
+              <!-- TODO: make a function that will translate it into Peoplish -->
+              {{ settings.options.snooze_time + ' minutes' }}
+            </p>
+            <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="mt-2em">
+      <h1 class="ml-auto mr-auto text-base text-black-60 font-100">
+        Sound
+      </h1>
+      <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
+      <div class="option">
+        <p class="mr-auto ml-0 text-base font-medium">
+          Play sound
+        </p>
+        <ToggleButton :checked="settings.sound.enabled" @click="emits('interaction', 'sound', 'toggle')" />
+      </div>
+      <div v-if="settings.sound.enabled">
+        <div class="option">
+          <p class="mr-auto ml-0 text-base font-medium">
+            Sound
+          </p>
+          <button class="ml-auto mr-0 text-black-60 flex items-center">
+            <p class="font-100 text-sm">
+              {{ settings.sound.file.split('/').slice(-1)[0].split('.')[0] }}
+            </p>
+            <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+          </button>
+        </div>
+        <div class="option">
+          <p class="mr-auto ml-0 text-base font-medium">
+            Volume
+          </p>
+          <button class="ml-auto mr-0 text-black-60 flex items-center">
+            <p class="font-100 text-sm">
+              {{ settings.sound.volume }}
+            </p>
+            <CaretIcon class="flex ml-0.5em w-1.25em h-1.25em text-black-60" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--TODO: motion section-->
+    <div class="mt-2em">
+      <h1 class="ml-auto mr-auto text-base text-black-60 font-100">
+        Motion
+      </h1>
+      <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
+      <div class="option">
+        <p class="mr-auto ml-0 text-base font-medium">
+          Use vibration
+        </p>
+        <ToggleButton :checked="settings.motion.enabled" @click="emits('interaction', 'motion', 'toggle')" />
+      </div>
+      <div v-if="settings.motion.enabled">
+        <div class="option">
+          <p class="mr-auto ml-0 text-base font-medium">
+            Vibration pattern
+          </p>
+          <button class="ml-auto mr-0 text-black-60 flex items-center">
+            <p class="font-100 text-sm">
+              {{ settings.motion.pattern.label }}
+            </p>
+            <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+          </button>
+        </div>
+        <div class="option">
+          <p class="mr-auto ml-0 text-base font-medium">
+            Intensity
+          </p>
+          <button class="ml-auto mr-0 text-black-60 flex items-center">
+            <p class="font-100 text-sm">
+              {{ settings.motion.intensity }}
+            </p>
+            <CaretIcon class="flex ml-0.5em w-1.25em h-1.25em text-black-60" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+<style>
+.option {
+  @apply h-2.875em rounded-large bg-black-5 mt-0.5em w-full flex items-center px-1.25em flex justify-between;
+}
+</style>
