@@ -5,9 +5,13 @@ import { RouterView } from 'vue-router'
 // import { toggleDark } from '~/composables/'
 import { Capacitor } from '@capacitor/core'
 import { ref } from 'vue'
+import Alarm from './composables/alarm-plugin'
 
 // import AlarmView from './views/AlarmView.vue'
 import HintComponent from './components/Hint.vue'
+
+// permissions
+await Alarm.checkAndRequestPermissions()
 
 // Hint component logic
 const triggered = ref(Capacitor.getPlatform() !== 'web')
@@ -28,13 +32,13 @@ const overflow = () => {
 <template>
   <!--<SampleView />-->
 
-  <RouterView/>
+  <RouterView />
 
   <HintComponent
     v-if="triggered === false"
     :class="Capacitor.getPlatform() === 'web' ? 'block' : 'hidden'"
-    @click="overflow"
     class="z-99"
+    @click="overflow"
   />
 
   <!--<header>
