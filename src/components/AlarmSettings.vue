@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ToggleButton from './ToggleButton.vue'
-import router from '~/router'
+// import router from '~/router'
 import CaretIcon from '~icons/srun/caret'
-import type { Settings } from '~/composables/alarmModel.ts'
+import type { Settings } from '~/composables/alarmModel'
 
 const emits = defineEmits<{
   (event: 'interaction', ibl: string, ion: string, ...args: any[]): void

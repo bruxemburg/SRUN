@@ -12,7 +12,7 @@ import { Alarm } from '~/composables/alarmModel.ts'
 /* const emits = defineEmits<{
   (event: 'getData', obj: string, ...args: any[]): void
 }>() */
-const alarm = $ref(new Alarm())
+let alarm = $ref(new Alarm())
 // const alarm = $ref<InstanceType<typeof Alarm> | null>(null)
 
 let newAlarm = false
@@ -36,7 +36,7 @@ else {
   // console.log(alarm.value.enabled)
 }
 
-const showSetting = $ref(false)
+let showSetting = $ref(false)
 
 function changeSettings(ibl: string, ion: string, ...args: any[]) {
   if (ibl === 'setting') {
@@ -64,8 +64,8 @@ function changeSettings(ibl: string, ion: string, ...args: any[]) {
     <AlarmSettings v-if="!idIsNotANumber" class="py-0.5em mb-10em" :settings="(alarm.settings as Settings)" @interaction="changeSettings" />
   </main>
   <TabBar />
-  <div v-if="showSetting" class="fixed z-99 top-0 left-0 w-full h-full" @click="showSetting=false">
-    <div class="absolute z-1 w-full h-full bg-black-100 backdrop-filter backdrop-blur-4 bg-opacity-25 pointer-events-none" />
+  <div v-if="showSetting" class="fixed z-99 top-0 left-0 w-full h-full">
+    <div class="absolute z-1 w-full h-full bg-black-100 backdrop-filter backdrop-blur-4 bg-opacity-25" @click="showSetting=false" />
     <AlarmSetting class="absolute z-2 bottom-0 left-0 w-full px-1em pb-1.75em pt-1.5em bg-white rounded-t-2em flex flex-col" @interaction="changeSettings" />
   </div>
 </template>

@@ -1,14 +1,15 @@
 <script setup lang="ts">
 // import { ref } from 'vue'
-import type { Tag } from '~/composables/alarmModel.ts'
+import type { Tag } from '~/composables/alarmModel'
+import type { Transport } from '~/composables/transportRoutesModel'
 
 const emits = defineEmits<{
   (e: 'sort-set-up', by: string): void
 }>()
 
 interface Props {
-  sortBy: Tag
-  sortOptions: Tag[]
+  sortBy: Tag | Transport
+  sortOptions: Tag[] | Transport[]
 }
 const {
   sortBy,

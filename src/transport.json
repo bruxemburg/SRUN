@@ -1,0 +1,18 @@
+[
+  {
+    "id": "bus",
+    "label": "Bus"
+  },
+  {
+    "id": "trn",
+    "label": "Train"
+  },
+  {
+    "id": "trm",
+    "label": "Tram"
+  },
+  {
+    "id": "car",
+    "label": "Car"
+  }
+]

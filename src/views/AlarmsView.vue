@@ -9,14 +9,14 @@ import router from '~/router'
 
 // import AlarmSettings from '~/components/AlarmSettings.vue'
 
-const settingsView = $ref(false)
-const interactableAlarm = $ref(-1)
+let settingsView = $ref(false)
+let interactableAlarm = $ref(-1)
 
 const sortOptions = tagsJson
 // const firstEl = sortOptions[1]
 // const sortBy = $ref(sortOptions[1]) // this shit does magic
 // console.log(sortOptions[1])
-const sortBy = $ref({ id: 'rec', title: 'Recent' })
+const sortBy = $ref({ id: 'rec', label: 'Recent' })
 /* const sortOptions = [
   {
     id: 'rec',

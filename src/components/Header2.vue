@@ -8,8 +8,8 @@ const {
 } = defineProps<Props>()
 
 // const canc = $ref('Cancel')
-const title = $ref('Edit alarm')
-const save = $ref('Save')
+let title = $ref('Edit alarm')
+let save = $ref('Save')
 
 if (newAlarm) {
   title = 'Add alarm'
