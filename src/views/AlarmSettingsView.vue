@@ -6,8 +6,9 @@ import AlarmSettings from '~/components/AlarmSettings.vue'
 import AlarmSetting from '~/components/AlarmSetting.vue'
 import router from '~/router'
 import TabBar from '~/components/TabBar.vue'
-import type { Settings } from '~/composables/alarmModel.ts'
-import { Alarm } from '~/composables/alarmModel.ts'
+// import type { Settings } from '~/composables/alarmModel.ts'
+// import { Settings, Transport } from '~/composables/alarmModel'
+import { Alarm, Route, Settings, Station, Transport } from '~/composables/alarmModel'
 
 /* const emits = defineEmits<{
   (event: 'getData', obj: string, ...args: any[]): void
@@ -36,11 +37,61 @@ else {
   // console.log(alarm.value.enabled)
 }
 
+let settingType = $ref('')
 let showSetting = $ref(false)
+const settingInput = $ref({} as any)
 
 function changeSettings(ibl: string, ion: string, ...args: any[]) {
   if (ibl === 'setting') {
-    if (ion === 'cancel') showSetting = false
+    if (ion === 'cancel') { showSetting = false }
+    else if (ion === 'open') {
+      settingType = args[0]
+      if (settingType === 'route') {
+        settingInput.sortBy = new Transport('bus')
+        settingInput.acRoute = JSON.parse(JSON.stringify(alarm.settings.general.route))
+        settingInput.routes = new Settings().getAllRoutes(settingInput.sortBy.id)
+      }
+      else if (settingType === 'station') {
+        settingInput.acStation = JSON.parse(JSON.stringify(alarm.settings.general.station))
+        settingInput.stations = new Settings().getAllStations(alarm.settings.general.route.id)
+      }
+      else if (settingType === 'label') {
+        settingInput.acLabel = alarm.settings.general.label
+      }
+      showSetting = true
+    }
+    else if (ion === 'save') {
+      if (settingType === 'route') {
+        if (alarm.settings.general.route.id !== settingInput.acRoute.id) {
+          alarm.settings.general.route = settingInput.acRoute
+          alarm.settings.general.station = new Station()
+        }
+      }
+      else if (settingType === 'station') {
+        if (alarm.settings.general.route.id !== settingInput.acRoute.id)
+          alarm.settings.general.station = settingInput.acStation
+      }
+      else if (settingType === 'label') {
+        if (alarm.settings.general.label !== args[0] && args[0] !== '')
+          alarm.settings.general.label = args[0]
+      }
+      settingType = ''
+      showSetting = false
+    }
+    else if (ion === 'sort') {
+      if (settingType === 'route') {
+        settingInput.sortBy = new Transport(args[0])
+        settingInput.routes = new Settings().getAllRoutes(settingInput.sortBy.id)
+      }
+    }
+    else if (ion === 'change') {
+      if (settingType === 'route')
+        settingInput.acRoute = new Route(args[0])
+      else if (settingType === 'station')
+        settingInput.acStation = new Station(args[0])
+      else if (settingType === 'label')
+        settingInput.acLabel = args[0]
+    }
   }
   else if (ibl === 'snooze') {
     if (ion === 'toggle') alarm.settings.options.snooze = !alarm.settings.options.snooze
@@ -51,14 +102,22 @@ function changeSettings(ibl: string, ion: string, ...args: any[]) {
   else if (ibl === 'motion') {
     if (ion === 'toggle') alarm.settings.motion.enabled = !alarm.settings.motion.enabled
   }
-  else if (ibl === 'route') {
-    showSetting = true
-  }
+  /* else if (ibl === 'transport') {
+    if (ion === 'change') {
+      const transport: Transport = args[0]
+      alarm.settings.transport = transport
+    }
+  } */
 }
+// console.log(allRoutes)
+
+/* const sortBy = $ref(new Transport('bus'))
+const acRouteCopy = $ref(JSON.parse(JSON.stringify(alarm.settings.general.route)))
+const allRoutes = $ref(new Settings().getAllRoutes(sortBy.id)) */
 
 </script>
 
-<template>
+<template :class="{'overflow-hidden' : showSetting}">
   <Header2 :new-alarm="newAlarm" />
   <main>
     <AlarmSettings v-if="!idIsNotANumber" class="py-0.5em mb-10em" :settings="(alarm.settings as Settings)" @interaction="changeSettings" />
@@ -66,6 +125,10 @@ function changeSettings(ibl: string, ion: string, ...args: any[]) {
   <TabBar />
   <div v-if="showSetting" class="fixed z-99 top-0 left-0 w-full h-full">
     <div class="absolute z-1 w-full h-full bg-black-100 backdrop-filter backdrop-blur-4 bg-opacity-25" @click="showSetting=false" />
-    <AlarmSetting class="absolute z-2 bottom-0 left-0 w-full px-1em pb-1.75em pt-1.5em bg-white rounded-t-2em flex flex-col" @interaction="changeSettings" />
+    <AlarmSetting class="absolute z-2 bottom-0 left-0 w-full px-1em pb-1.75em pt-1.5em bg-white rounded-t-2em flex flex-col" :type="settingType" :input="settingInput" @interaction="changeSettings" />
   </div>
 </template>
+
+<!--<style>
+
+</style>-->

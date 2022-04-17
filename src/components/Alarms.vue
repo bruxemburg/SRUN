@@ -6,7 +6,7 @@ import Alarm from '~/composables/alarm-plugin'
 
 import TrashIcon from '~icons/srun/trashbin'
 import CaretIcon from '~icons/srun/caret'
-import type { Alarm as AlarmModel, Tag } from '~/composables/alarmModel.ts'
+import type { Alarm as AlarmModel, Tag } from '~/composables/alarmModel'
 // const emits = defineEmits(['interaction'])
 
 const emits = defineEmits<{
@@ -21,10 +21,10 @@ const {
   sortBy,
   alarms,
 } = defineProps<Props>()
-
+console.log(alarms)
 const editingMode = $ref(false)
 
-function checkSortOption(alarm: any, by: string): boolean {
+function checkSortOption(alarm: AlarmModel, by: string): boolean {
   if (by === 'all') return true
   else if (by === 'act' || by === 'dis') return alarm.enabled === (by === 'act')
   else
@@ -76,7 +76,7 @@ const setAlarm = async() => {
           </div>
           <div class="flex flex-col justify-center ml-4">
             <h3 class="font-500">
-              {{ alarm.settings.general.route }}
+              {{ alarm.settings.general.route.label }}
             </h3>
             <small class="font-400">
               {{ alarm.settings.general.label }}  •  {{ alarm.settings.general.alarmtime }}

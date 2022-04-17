@@ -1,7 +1,6 @@
 <script setup lang="ts">
 // import { ref } from 'vue'
-import type { Tag } from '~/composables/alarmModel'
-import type { Transport } from '~/composables/transportRoutesModel'
+import type { Tag, Transport } from '~/composables/alarmModel'
 
 const emits = defineEmits<{
   (e: 'sort-set-up', by: string): void

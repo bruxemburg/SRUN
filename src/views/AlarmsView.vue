@@ -6,6 +6,7 @@ import Footer from '~/components/TabBar.vue'
 import SortBar from '~/components/SortBar.vue'
 import Alarms from '~/components/Alarms.vue'
 import router from '~/router'
+import { Alarm } from '~/composables/alarmModel'
 
 // import AlarmSettings from '~/components/AlarmSettings.vue'
 
@@ -40,7 +41,7 @@ const sortBy = $ref({ id: 'rec', label: 'Recent' })
   },
 ] */
 
-const alarms = alarmsJson
+const alarms = alarmsJson.map((val, key) => new Alarm(key))
 alarms.sort((a, b) => { return a.id - b.id })
 
 function sortSetUp(by: string): void {

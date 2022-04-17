@@ -25,49 +25,55 @@ const {
         General
       </h1>
       <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
-      <div class="option">
+      <div class="option" @click="emits('interaction', 'setting', 'open', 'route')">
         <p class="mr-auto ml-0 text-base font-medium">
           Route
         </p>
-        <button class="ml-auto mr-0 text-black-60 flex items-center" @click="emits('interaction', 'route')">
-          <p class="font-100 text-sm">
-            {{ settings.general.route }}
+        <div class="ml-auto mr-0 text-black-60 flex items-center">
+          <p v-if="settings.general.route.id !== -1" class="font-100 text-sm">
+            {{ settings.general.route.label }}
+          </p>
+          <p v-else class="font-100 text-sm">
+            Choose a route
           </p>
           <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
-        </button>
+        </div>
       </div>
-      <div class="option">
+      <div v-if="settings.general.route.id !== -1" class="option" @click="emits('interaction', 'setting', 'open', 'station')">
         <p class="mr-auto ml-0 text-base font-medium">
           Stop
         </p>
-        <button class="ml-auto mr-0 text-black-60 flex items-center">
-          <p class="font-100 text-sm">
-            {{ settings.general.station }}
+        <div class="ml-auto mr-0 text-black-60 flex items-center">
+          <p v-if="settings.general.station.id !== -1" class="font-100 text-sm">
+            {{ settings.general.station.label }}
+          </p>
+          <p v-else class="font-100 text-sm">
+            Choose a station/stop
           </p>
           <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
-        </button>
+        </div>
       </div>
       <div class="option">
         <p class="mr-auto ml-0 text-base font-medium">
           Wake up before
         </p>
-        <button class="ml-auto mr-0 text-black-60 flex items-center">
+        <div class="ml-auto mr-0 text-black-60 flex items-center">
           <p class="font-100 text-sm">
             {{ Math.abs(settings.general.alarmtime) + ' minutes' }}
           </p>
           <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
-        </button>
+        </div>
       </div>
-      <div class="option">
+      <div class="option" @click="emits('interaction', 'setting', 'open', 'label')">
         <p class="mr-auto ml-0 text-base font-medium">
           Label
         </p>
-        <button class="ml-auto mr-0 text-black-60 flex items-center">
+        <div class="ml-auto mr-0 text-black-60 flex items-center">
           <p class="font-100 text-sm">
             {{ settings.general.label }}
           </p>
           <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
-        </button>
+        </div>
       </div>
     </div>
     <div class="mt-2em">

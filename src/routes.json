@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "label": "145 | Paldiski-Tallinn",
+    "transport": "bus"
+  },
+  {
+    "id": 1,
+    "label": "512 | Paldiski-Tallinn",
+    "transport": "trn"
+  },
+  {
+    "id": 2,
+    "label": "4 | Tondi-Lennujaam",
+    "transport": "trm"
+  },
+  {
+    "id": 3,
+    "label": "Keep me awake in car",
+    "transport": "car"
+  },
+  {
+    "id": 4,
+    "label": "145 | Tallinn-Turba",
+    "transport": "trm"
+  },
+  {
+    "id": 5,
+    "label": "145 | Tallinn-Turba",
+    "transport": "trm"
+  },
+  {
+    "id": 6,
+    "label": "145 | Tallinn-Turba",
+    "transport": "trm"
+  },
+  {
+    "id": 7,
+    "label": "145 | Tallinn-Turba",
+    "transport": "trm"
+  }
+]

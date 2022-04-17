@@ -1,18 +1,22 @@
 [
   {
     "id": "bus",
-    "label": "Bus"
+    "label": "Bus",
+    "routes": [0]
   },
   {
     "id": "trn",
-    "label": "Train"
+    "label": "Train",
+    "routes": [1]
   },
   {
     "id": "trm",
-    "label": "Tram"
+    "label": "Tram",
+    "routes": [2, 4, 5, 6, 7]
   },
   {
     "id": "car",
-    "label": "Car"
+    "label": "Car",
+    "routes": [3]
   }
 ]

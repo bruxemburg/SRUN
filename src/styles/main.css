@@ -147,3 +147,7 @@ small {
 .toggle .checkbox:checked ~ .layer::before{
   @apply bg-green-100;
 }
+
+input {
+  all: unset;
+}
