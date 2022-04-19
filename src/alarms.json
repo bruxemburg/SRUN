@@ -10,8 +10,8 @@
         "alarmtime": -5,
         "label": "Bus",
         "image": {
-          "ico": "sleeping-face",
-          "bg": "bg-blue-25"
+          "ico": 0,
+          "bg": 0
         }
       },
       "options": {
@@ -46,8 +46,8 @@
         "alarmtime": -5,
         "label": "Morning train",
         "image": {
-          "ico": "relieved-face",
-          "bg": "bg-red-25"
+          "ico": 1,
+          "bg": 1
         }
       },
       "options": {
@@ -82,8 +82,8 @@
         "alarmtime": -5,
         "label": "Tram",
         "image": {
-          "ico": "sleepy-face",
-          "bg": "bg-green-25"
+          "ico": 2,
+          "bg": 2
         }
       },
       "options": {
@@ -118,8 +118,8 @@
         "alarmtime": 10,
         "label": "Every 10 min",
         "image": {
-          "ico": "yawning-face",
-          "bg": "bg-yellow-25"
+          "ico": 3,
+          "bg": 3
         }
       },
       "options": {

@@ -6,6 +6,10 @@ import { Capacitor } from '@capacitor/core'
 import SearchIcon from '~icons/srun/search'
 import PlusIcon from '~icons/srun/plus'
 
+const emits = defineEmits<{
+  (event: 'interaction', interactable: string, interaction: string, ...args: any[]): void
+}>()
+
 const searchDialog = () => {
   // console.log('searhc')
 }
@@ -55,8 +59,8 @@ window.addEventListener('scroll', () => {
 </script>
 
 <template>
-  <header>
-    <div id="relative-header" class="relative" :class="Capacitor.getPlatform() === 'ios' ? 'pt-3.75em' : 'pt-1em'">
+  <header class="releative">
+    <div id="relative-header" class="relative z-98" :class="Capacitor.getPlatform() === 'ios' ? 'pt-3.75em' : 'pt-1em'">
       <div
         class="flex flex-row items-center w-full mt-1em p-1em"
       >
@@ -68,7 +72,7 @@ window.addEventListener('scroll', () => {
         </h1>
         <div class="flex flex-row gap-1em mr-0 ml-auto">
           <SearchIcon class="w-2.25em h-2.25em mt-0.5em min-w-31.30434782608696px min-h-31.30434782608696px" @click="searchDialog()" />
-          <PlusIcon class="w-2.25em h-2.25em mt-0.5em min-w-31.30434782608696px min-h-31.30434782608696px" />
+          <PlusIcon class="w-2.25em h-2.25em mt-0.5em min-w-31.30434782608696px min-h-31.30434782608696px" @click="emits('interaction', 'alarm', 'new')" />
         </div>
       </div>
       <div class="w-full h-0.5px bg-black-15" />
@@ -78,7 +82,7 @@ window.addEventListener('scroll', () => {
     <div
       id="fixed-header"
       :data-animation-state="header ? 'show' : 'hide'"
-      class="fixed top-0 left-0 w-full"
+      class="fixed top-0 left-0 w-full z-98"
     >
       <div
         class="flex flex-row items-center w-full px-1em pb-0.25em gap-x-1em justify-between"
@@ -88,7 +92,7 @@ window.addEventListener('scroll', () => {
         <SearchIcon class="w-2.25em h-2.25em min-w-31.30434782608696px min-h-31.30434782608696px" @click="searchDialog()" />
         <!--TODO: Replace hardcoded values-->
         <h3>Your alarms</h3>
-        <PlusIcon class="w-2.25em h-2.25em min-w-31.30434782608696px min-h-31.30434782608696px" />
+        <PlusIcon class="w-2.25em h-2.25em min-w-31.30434782608696px min-h-31.30434782608696px" @click="emits('interaction', 'alarm', 'new')" />
       </div>
       <div class="w-full h-0.5px bg-black-15" />
     </div>

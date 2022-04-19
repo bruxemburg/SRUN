@@ -6,4 +6,4 @@ export interface AlarmPlugin {
 
 const Alarm = registerPlugin<AlarmPlugin>('Alarm')
 
-export default Alarm
+export { Alarm }

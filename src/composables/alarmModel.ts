@@ -1,8 +1,13 @@
-import alarmsJson from '../alarms.json'
+/* eslint-disable no-cond-assign */
+// import { ExceptionCode } from '@capacitor/core'
+import { Storage } from '@capacitor/storage'
+// import alarmsJson from '../alarms.json'
 import routesJson from '../routes.json'
 import stationsJson from '../stations.json'
 import tagsJson from '../tags.json'
 import transportJson from '../transport.json'
+import iconsJson from '../icons.json'
+import backgroundsJson from '../backgrounds.json'
 
 class Alarm {
   id: number
@@ -12,15 +17,8 @@ class Alarm {
   expiration: number
 
   constructor(id?: number) {
-    let alarm
-    if (id !== undefined && (alarm = alarmsJson[id])) {
-      // TODO: fetch alarm from cache
-      this.id = id
-      this.enabled = alarm.enabled
-      // console.log(alarm.tags)
-      this.tags = alarm.tags.map(tag => new Tag(tag))
-      this.settings = new Settings(alarm.settings)
-      this.expiration = alarm.expiration
+    if (id !== undefined) {
+      this.getAlarm(id)
     }
     else {
       this.id = -1
@@ -29,6 +27,108 @@ class Alarm {
       this.settings = new Settings()
       this.expiration = 0
     }
+  }
+
+  async getAlarm(id: number): Promise<Alarm> {
+    if (id === -1) return new Alarm()
+    const alrm = await Storage.get({ key: 'alarms' })
+      .then((alarms) => {
+        // if (!alarms.value) throw new Error('No alarms found')
+        if (!alarms.value) return undefined
+        // console.log(alarms)
+        const alarm = JSON.parse(alarms.value).find((alarm) => { return alarm.id === id })
+        // JSON.parse(JSON.stringify()) is used to clone the object, used as a fast fix of vue reactvity
+        // TODO: fix it
+        //  || (alarm = JSON.parse(JSON.stringify(alarmsJson[id])))
+        if (alarm) {
+          this.id = id
+          this.enabled = alarm.enabled
+          // console.log(alarm)
+          this.tags = alarm.tags.map(tag => new Tag(tag))
+          alarm.settings.general.route = new Route(alarm.settings.general.route)
+          alarm.settings.general.station = new Station(alarm.settings.general.station)
+          alarm.settings.general.image.ico = new Icon(alarm.settings.general.image.ico)
+          alarm.settings.general.image.bg = new Background(alarm.settings.general.image.bg)
+          this.settings = new Settings(alarm.settings)
+          this.expiration = alarm.expiration
+        }
+        // JSON.parse(JSON.stringify()) is used to clone the object, used as a fast fix of vue reactvity
+        // TODO: fix it
+        return JSON.parse(JSON.stringify(this))
+      })
+    return alrm
+  }
+
+  async getAllAlarms(): Promise<Alarm[]> {
+    // const asyncMap = alarmsJson.map(async(alarm) => { (alarm as any) = await this.getAlarm(alarm.id); return alarm as Alarm })
+    const asyncMap = await Storage.get({ key: 'alarms' })
+      .then((alarms) => { if (alarms.value) return JSON.parse(alarms.value).map(async(alarm) => { (alarm as any) = await this.getAlarm(alarm.id); return alarm as Alarm }) })
+    // console.log(asyncMap)
+    const alarms = await Promise.all(asyncMap)
+    return alarms
+    // return await Promise.all(asyncMap)
+  }
+
+  async saveAlarm(alarm: Alarm): Promise<void> {
+    const alarmJson = alarm as any
+    alarmJson.settings.general.route = alarm.settings.general.route.id
+    alarmJson.settings.general.station = alarm.settings.general.station.id
+    alarmJson.settings.general.image.ico = alarm.settings.general.image.ico.id
+    alarmJson.settings.general.image.bg = alarm.settings.general.image.bg.id
+
+    if (alarmJson.id === -1) await this.getNewAlarmId().then(id => alarmJson.id = id)
+
+    await Storage.get({ key: 'alarms' })
+      .then(async(val) => {
+        let alarms
+        alarms = (val.value && (alarms = JSON.parse(val.value)) && alarms.length > 0) ? alarms : undefined
+        // alarms = (val.value && (alarms = JSON.parse(val.value)) && alarms.length > 0) ? alarms : undefined
+        // console.log(alarms)
+        // return
+        let added = false
+        if (!alarms) { alarms = [alarmJson] }
+        else {
+          // console.log(alarms)
+          for (let i = 0; i < alarms.length; i++)
+            if (alarms[i].id === alarmJson.id) { alarms[i] = alarmJson; added = true; break }
+
+          /* if (alarms) {
+            alarms = alarms.map((val) => {
+              if (val.id === alarmJson.id) {
+                // console.log(val)
+                added = true
+                // return alarmJson
+              }
+              console.log(val)
+              return alarm
+            })
+          } */
+          /* console.log(alarms)
+          return */
+          if (!added) alarms.push(alarmJson)
+          /* console.log(alarms)
+          return */
+        }
+        /* console.log(alarms)
+        return */
+        if (val.value !== (alarms = JSON.stringify(alarms))) await Storage.set({ key: 'alarms', value: alarms })
+        // let input = '['; if (alarms.value && alarms.value !== '[]') input = `${alarms.value.substring(0, alarms.value.length - 1)},`; await Storage.set({ key: 'alarms', value: `${input + JSON.stringify(alarmJson)}]` })
+      })
+  }
+
+  async deleteAlarm(id: number): Promise<void> {
+    await Storage.get({ key: 'alarms' })
+      .then(async(alarms) => { let input = alarms.value ? alarms.value : ''; if (input) input = JSON.stringify(JSON.parse(input).filter((alarm) => { return alarm.id !== id })); await Storage.set({ key: 'alarms', value: input }) })
+  }
+
+  async getNewAlarmId(): Promise<number> {
+    return await Storage.get({ key: 'alarms' })
+      .then((alarms) => { let i = 0; if (alarms.value) { const ids = JSON.parse(alarms.value).map((alarm) => { return alarm.id }); while (ids.includes(i)) i++ } return i })
+  }
+
+  async toggleAlarm(id: number): Promise<void> {
+    await Storage.get({ key: 'alarms' })
+      .then(async(alarms) => { let input = alarms.value ? alarms.value : ''; if (input) input = JSON.stringify(JSON.parse(input).map((alarm) => { if (alarm.id === id) alarm.enabled = !alarm.enabled; return alarm })); await Storage.set({ key: 'alarms', value: input }) })
   }
 }
 class Tag {
@@ -55,13 +155,13 @@ class Tag {
 class Settings {
   general: {
     // transport: Transport | string
-    route: Route | number
-    station: Station | number
+    route: Route
+    station: Station
     alarmtime: number
     label: string
     image: {
-      ico: string
-      bg: string
+      ico: Icon
+      bg: Background
     }
   }
 
@@ -91,8 +191,8 @@ class Settings {
       // let tmp: any
       // console.log(settings.general)
       // settings.general.transport = (settings.general.transport instanceof Transport) ? settings.general.transport : new Transport(settings.general.transport)
-      settings.general.route = (settings.general.route instanceof Route) ? settings.general.route : new Route(settings.general.route)
-      settings.general.station = (settings.general.station instanceof Station) ? settings.general.station : new Station(settings.general.station)
+      // settings.general.route = (settings.general.route instanceof Route) ? settings.general.route : new Route(settings.general.route)
+      // settings.general.station = (settings.general.station instanceof Station) ? settings.general.station : new Station(settings.general.station)
       // console.log((tmp = (settings.general.transport as Transport).routes.find(route => route.id === settings.general.route)))
       /* settings.general.route = (settings.general.route instanceof Route) ? settings.general.route : (tmp = (settings.general.transport as Transport).routes.find(route => route.id === settings.general.route) ? tmp : new Route())
       settings.general.station = (settings.general.station instanceof Station) ? settings.general.station : (tmp = (settings.general.route as Route).stations.find(station => station.id === settings.general.station) ? tmp : new Station()) */
@@ -132,8 +232,8 @@ class Settings {
         alarmtime: -5,
         label: 'Alarm',
         image: {
-          ico: '',
-          bg: '',
+          ico: new Icon(),
+          bg: new Background(),
         },
       }
       this.options = {
@@ -229,6 +329,42 @@ class Station {
       this.id = -1
       this.label = 'Unknown'
       this.routes = [new Route()]
+    }
+  }
+}
+class Icon {
+  id: number
+  file: string
+
+  constructor(id?: number) {
+    let icon
+    if (id !== undefined && (icon = iconsJson.find(ic => ic.id === id))) {
+      this.id = id
+      this.file = icon.file
+    }
+    else {
+      // temp
+      const rId = Math.floor(Math.random() * backgroundsJson.length)
+      this.id = iconsJson[rId].id
+      this.file = iconsJson[rId].file
+    }
+  }
+}
+class Background {
+  id: number
+  color: string
+
+  constructor(id?: number) {
+    let bg
+    if (id !== undefined && (bg = backgroundsJson.find(bg => bg.id === id))) {
+      this.id = id
+      this.color = bg.color
+    }
+    else {
+      // temp
+      const rId = Math.floor(Math.random() * backgroundsJson.length)
+      this.id = backgroundsJson[rId].id
+      this.color = backgroundsJson[rId].color
     }
   }
 }

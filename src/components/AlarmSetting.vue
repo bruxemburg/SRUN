@@ -6,8 +6,8 @@ import CaretIcon from '~icons/srun/caret'
 import SearchIcon from '~icons/srun/search'
 import CheckmarkIcon from '~icons/srun/checkmark'
 // import type { Settings } from '~/composables/alarmModel'
-import type { Route } from '~/composables/alarmModel'
-import { Settings, Transport } from '~/composables/alarmModel'
+// import type { Route } from '~/composables/alarmModel'
+// import { Settings, Transport } from '~/composables/alarmModel'
 
 const emits = defineEmits<{
   (event: 'interaction', ibl: string, ion: string, ...args: any[]): void
@@ -86,7 +86,7 @@ function sortSetUp(by: string): void {
         <SearchIcon class="text-base" />
       </div>
       <div class="bg-black-5 h-11.25em rounded-1.25em overflow-scroll">
-        <div v-for="route in input.routes" :key="route.id" :class="{'bg-blue-25' : route.id === input.acRoute.id}" @click="emits('interaction', 'setting', 'cpChange', route.id)">
+        <div v-for="route in input.routes" :key="route.id" :class="{'bg-blue-25' : route.id === input.acRoute.id}" @click="emits('interaction', 'setting', 'change', route.id)">
           <div v-if="route.transport.id !== 'car'" class="py-0.5em mx-1.25em border-b border-b-black-15 flex flex-row items-center">
             <div class="w-1.625em flex items-center justify-center">
               <p class="font-medium">
@@ -131,7 +131,7 @@ function sortSetUp(by: string): void {
         <SearchIcon class="text-base" />
       </div>
       <div class="bg-black-5 h-11.25em rounded-1.25em overflow-scroll">
-        <div v-for="station in input.stations" :key="station.id" :class="{'bg-blue-25' : station.id === input.acStation.id}" @click="emits('interaction', 'setting', 'cpChange', station.id)">
+        <div v-for="station in input.stations" :key="station.id" :class="{'bg-blue-25' : station.id === input.acStation.id}" @click="emits('interaction', 'setting', 'change', station.id)">
           <div class="py-0.5em mx-1.25em border-b border-b-black-15 flex flex-row items-center">
             <div class="flex items-center justify-center">
               <p>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // import { ref } from 'vue'
-import type { PluginResultError } from '@capacitor/core'
+// import type { PluginResultError } from '@capacitor/core'
 import ToggleButton from './ToggleButton.vue'
-import Alarm from '~/composables/alarm-plugin'
+// import Alarm from '~/composables/alarm-plugin'
 
 import TrashIcon from '~icons/srun/trashbin'
 import CaretIcon from '~icons/srun/caret'
@@ -21,7 +21,7 @@ const {
   sortBy,
   alarms,
 } = defineProps<Props>()
-console.log(alarms)
+
 const editingMode = $ref(false)
 
 function checkSortOption(alarm: AlarmModel, by: string): boolean {
@@ -33,7 +33,7 @@ function checkSortOption(alarm: AlarmModel, by: string): boolean {
 }
 
 // set alarm quick solution
-const setAlarm = async() => {
+/* const setAlarm = async() => {
   const now = new Date()
   const date = new Date(now.setMinutes(now.getMinutes() + 2))
 
@@ -45,7 +45,7 @@ const setAlarm = async() => {
     .catch((error: PluginResultError) => {
       console.error(error.message)
     })
-}
+} */
 
 </script>
 
@@ -53,14 +53,14 @@ const setAlarm = async() => {
   <!--<div class="bg-yellow-25 bg-green-25 bg-red-25 bg-blue-25">don't dell it, it is made to preload custom colors</div>-->
   <div>
     <div class="flex flex-row pb-0.25em">
-      <p class="mr-auto ml-0">
-        {{ sortBy.title }}
-      </p>
+      <h4 class="mr-auto ml-0 text-black-60">
+        {{ sortBy.label }}
+      </h4>
       <button class="ml-auto mr-0" @click="editingMode = !editingMode">
-        <p v-if="editingMode">
+        <p v-if="editingMode" class="text-blue-100 font-light">
           Cancel
         </p>
-        <p v-else>
+        <p v-else class="text-blue-100 font-light">
           Edit
         </p>
       </button>
@@ -68,10 +68,10 @@ const setAlarm = async() => {
     <div>
       <div v-for="alarm in alarms" :key="alarm.id">
         <div v-if="checkSortOption(alarm, sortBy.id)" class="py-4 border-t border-t-black-5 flex flex-row w-full items-center">
-          <div v-if="!editingMode" class="rounded-full-22px px-1.5625em py-1.1875em" :class="alarm.settings.general.image.bg">
-            <img :src="`./assets/emojis/${alarm.settings.general.image.ico}.png`" alt="">
+          <div v-if="!editingMode" class="rounded-full-22px px-1.5625em py-1.1875em" :class="'bg-'+alarm.settings.general.image.bg.color">
+            <img :src="`./assets/emojis/${alarm.settings.general.image.ico.file}`" alt="">
           </div>
-          <div v-else class="rounded-full-22px px-1.25em py-0.875em bg-red-25">
+          <div v-else class="rounded-full-22px px-1.25em py-0.875em bg-red-25" @click="emits('interaction', 'alarm', 'delete', alarm.id)">
             <TrashIcon class="text-red-100 w-2.625em h-2.625em" />
           </div>
           <div class="flex flex-col justify-center ml-4">
@@ -82,13 +82,13 @@ const setAlarm = async() => {
               {{ alarm.settings.general.label }}  •  {{ alarm.settings.general.alarmtime }}
             </small>
           </div>
-          <ToggleButton v-if="!editingMode" :checked="alarm.enabled" />
+          <ToggleButton v-if="!editingMode" :checked="alarm.enabled" @click="emits('interaction', 'alarm', 'toggle', alarm.id)" />
           <!--<div v-if="!editingMode" class="toggle flex w-2.5em h-1.625em ml-auto rounded-full relative">
             <input type="checkbox" class="checkbox opacity-0 w-full h-full absolute z-2" :checked="alarm.enabled" @click="setAlarm">
             <div class="knobs" />
             <div class="layer" />
           </div> -->
-          <CaretIcon v-else class="flex ml-auto w-1.75em h-1.75em" @click="emits('interaction', 'settings', 'open', alarm.id)" />
+          <CaretIcon v-else class="flex ml-auto w-1.75em h-1.75em" @click="emits('interaction', 'alarm', 'edit', alarm.id)" />
         </div>
       </div>
     </div>

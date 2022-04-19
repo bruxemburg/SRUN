@@ -10,9 +10,11 @@ const emits = defineEmits<{
 
 interface Props {
   settings: Settings
+  newAlarm: boolean
 }
 const {
   settings,
+  newAlarm,
 } = defineProps<Props>()
 // id: -1
 // if (alarm.id === -1) router.push('/alarms')
@@ -186,6 +188,17 @@ const {
             <CaretIcon class="flex ml-0.5em w-1.25em h-1.25em text-black-60" />
           </button>
         </div>
+      </div>
+    </div>
+    <div v-if="!newAlarm" class="mt-2em">
+      <h1 class="ml-auto mr-auto text-base text-black-60 font-100">
+        Danger zone
+      </h1>
+      <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
+      <div class="option bg-red-25 flex justify-center items-center" @click="emits('interaction', 'alarm', 'delete')">
+        <p class=" text-red-100 my-0.625em">
+          Delete this alarm
+        </p>
       </div>
     </div>
   </div>
