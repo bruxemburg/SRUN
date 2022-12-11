@@ -1,37 +1,41 @@
 <script setup lang="ts">
 // import { ref } from 'vue'
-import type { Tag, Transport } from '~/composables/alarmModel'
+import type { Tag, Transport } from "~/composables/alarmModel";
+
+export interface Props {
+  sortBy: Tag | Transport;
+  sortOptions: Tag[] | Transport[];
+}
+const { sortBy, sortOptions } = defineProps<Props>();
 
 const emits = defineEmits<{
-  (e: 'sort-set-up', by: string): void
-}>()
-
-interface Props {
-  sortBy: Tag | Transport
-  sortOptions: Tag[] | Transport[]
-}
-const {
-  sortBy,
-  sortOptions,
-} = defineProps<Props>()
-
+  (e: "sort-set-up", by: string): void;
+}>();
 </script>
 
 <template>
   <div class="flex flex-row inline-block overflow-x-scroll gap-x-0.5em">
     <div v-for="option in sortOptions" :key="option.id">
-      <div v-if="option.id == sortBy.id" class="py-0.625em px-1.25em rounded-full bg-black-100 text-white" @click="emits('sort-set-up', option.id)">
+      <div
+        v-if="option.id === sortBy.id"
+        class="py-0.625em px-1.25em rounded-full bg-black-100 text-white"
+        @click="emits('sort-set-up', option.id)"
+      >
         <p class="font-300">
           {{ option.label }}
         </p>
       </div>
-      <div v-else class="py-0.625em px-1.25em rounded-full bg-black-5 text-black-100e" @click="emits('sort-set-up', option.id)">
+      <div
+        v-else
+        class="py-0.625em px-1.25em rounded-full bg-black-5 text-black-100e"
+        @click="emits('sort-set-up', option.id)"
+      >
         <p class="font-300">
           {{ option.label }}
         </p>
       </div>
     </div>
-    <!--<div class="py-0.625em px-1.25em bg-black-100 rounded-full text-white">
+    <!-- <div class="py-0.625em px-1.25em bg-black-100 rounded-full text-white">
       <p class="font-300">
         Recent
       </p>
@@ -55,6 +59,6 @@ const {
       <p class="font-300">
         All
       </p>
-    </div>-->
+    </div> -->
   </div>
 </template>

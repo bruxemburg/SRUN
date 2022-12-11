@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import AlarmIcon from '~icons/srun/alarm'
-import HomeIcon from '~icons/srun/home'
-import BulbIcon from '~icons/srun/bulb'
-import SearchIcon from '~icons/srun/search'
+import AlarmIcon from "~icons/srun/alarm";
+import HomeIcon from "~icons/srun/home";
+import BulbIcon from "~icons/srun/bulb";
+import SearchIcon from "~icons/srun/search";
 </script>
 
 <template>
@@ -12,9 +12,7 @@ import SearchIcon from '~icons/srun/search'
       <!-- black thing -->
       <!-- TODO: make this thing moving but dunno why -->
       <div
-        class="absolute top-1/2 left-2.265em items-center
-      w-4.5em h-3/5 bg-black-100 rounded-full
-      transform -translate-y-1/2 -z-1"
+        class="absolute top-1/2 left-2.265em items-center w-4.5em h-3/5 bg-black-100 rounded-full transform -translate-y-1/2 -z-1"
       />
       <!-- actual tabbar -->
       <div class="flex flex-row items-center justify-evenly w-full py-1.5em">
