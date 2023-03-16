@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import AlarmIcon from "~icons/srun/alarm";
-import HomeIcon from "~icons/srun/home";
-import BulbIcon from "~icons/srun/bulb";
-import SearchIcon from "~icons/srun/search";
+// import AlarmIcon from "~icons/srun/alarm";
+// import HomeIcon from "~icons/srun/home";
+// import BulbIcon from "~icons/srun/bulb";
+// import SearchIcon from "~icons/srun/search";
 </script>
 
 <template>
@@ -16,10 +16,10 @@ import SearchIcon from "~icons/srun/search";
       />
       <!-- actual tabbar -->
       <div class="flex flex-row items-center justify-evenly w-full py-1.5em">
-        <AlarmIcon class="text-2xl text-white" />
-        <HomeIcon class="text-xl text-black-100" />
-        <BulbIcon class="text-xl text-black-100" />
-        <SearchIcon class="text-xl text-black-100" />
+        <i-srun-alarm class="text-2xl text-white" />
+        <i-srun-home class="text-xl text-black-100" />
+        <i-srun-bulb class="text-xl text-black-100" />
+        <i-srun-search class="text-xl text-black-100" />
       </div>
     </div>
   </footer>

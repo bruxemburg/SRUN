@@ -122,8 +122,18 @@ function interactions(interactable: string, interaction: string, ...args: any[])
   <Header @interaction="interactions" />
 
   <main>
-    <SortBar class="py-1em" :sort-by="sortBy" :sort-options="sortOptions" @sort-set-up="sortSetUp" />
-    <Alarms class="py-1em" :sort-by="sortBy" :alarms="alarms" @interaction="interactions" />
+    <SortBar
+      class="py-1em"
+      :sort-by="sortBy"
+      :sort-options="sortOptions"
+      @sort-set-up="sortSetUp"
+    />
+    <Alarms
+      class="py-1em"
+      :sort-by="sortBy"
+      :alarms="alarms"
+      @interaction="interactions"
+    />
     <TipsAndTricks class="mb-6em" />
   </main>
 

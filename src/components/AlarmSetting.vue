@@ -2,9 +2,9 @@
 import { ref } from "vue";
 import transportJson from "../transport.json";
 import SortBar from "./SortBar.vue";
-import CaretIcon from "~icons/srun/caret";
-import SearchIcon from "~icons/srun/search";
-import CheckmarkIcon from "~icons/srun/checkmark";
+// import CaretIcon from "~icons/srun/caret";
+// import SearchIcon from "~icons/srun/search";
+// import CheckmarkIcon from "~icons/srun/checkmark";
 // import type { Settings } from '~/composables/alarmModel'
 // import type { Route } from '~/composables/alarmModel'
 // import { Settings, Transport } from '~/composables/alarmModel'
@@ -69,11 +69,11 @@ function sortSetUp(by: string): void {
         class="flex justify-center items-center h-1.75em w-1.75em rounded-full bg-black-5"
         @click="emits('interaction', 'setting', 'cancel')"
       >
-        <CaretIcon class="p-0.05em text-black-60 transform rotate-180" />
+        <i-srun-caret class="p-0.05em text-black-60 transform rotate-180" />
       </button>
       <h3>Choose a route</h3>
       <button class="invisible">
-        <CaretIcon class="p-0.05em text-black-60 transform rotate-180" />
+        <i-srun-caret class="p-0.05em text-black-60 transform rotate-180" />
       </button>
     </div>
     <SortBar
@@ -83,9 +83,11 @@ function sortSetUp(by: string): void {
       @sort-set-up="sortSetUp"
     />
     <div class="mb-0.5em">
-      <div class="mb-1em py-0.75em px-1.25em bg-black-5 rounded-full rounded-0.875em flex justify-between items-center">
+      <div
+        class="mb-1em py-0.75em px-1.25em bg-black-5 rounded-full rounded-0.875em flex justify-between items-center"
+      >
         <p class="text-black-60">Search for route...</p>
-        <SearchIcon class="text-base" />
+        <i-srun-search class="text-base" />
       </div>
       <div class="bg-black-5 h-11.25em rounded-1.25em overflow-scroll">
         <div
@@ -108,18 +110,30 @@ function sortSetUp(by: string): void {
                 {{ route.label.split(" | ")[1] }}
               </p>
             </div>
-            <CheckmarkIcon class="ml-auto text-base" :class="{ invisible: route.id !== input.acRoute.id }" />
+            <i-srun-checkmark
+              class="ml-auto text-base"
+              :class="{ invisible: route.id !== input.acRoute.id }"
+            />
           </div>
-          <div v-else class="py-0.5em mx-1.25em border-b border-b-black-15 flex flex-row items-center">
+          <div
+            v-else
+            class="py-0.5em mx-1.25em border-b border-b-black-15 flex flex-row items-center"
+          >
             <p class="font-regular">
               {{ route.label }}
             </p>
-            <CheckmarkIcon class="ml-auto text-base" :class="{ invisible: route.id !== input.acRoute.id }" />
+            <i-srun-checkmark
+              class="ml-auto text-base"
+              :class="{ invisible: route.id !== input.acRoute.id }"
+            />
           </div>
         </div>
       </div>
     </div>
-    <button class="bg-blue-100 text-white rounded-1.375em py-1em" @click="emits('interaction', 'setting', 'save')">
+    <button
+      class="bg-blue-100 text-white rounded-1.375em py-1em"
+      @click="emits('interaction', 'setting', 'save')"
+    >
       <h3>Choose</h3>
     </button>
   </div>
@@ -129,17 +143,19 @@ function sortSetUp(by: string): void {
         class="flex justify-center items-center h-1.75em w-1.75em rounded-full bg-black-5"
         @click="emits('interaction', 'setting', 'cancel')"
       >
-        <CaretIcon class="p-0.05em text-black-60 transform rotate-180" />
+        <i-srun-caret class="p-0.05em text-black-60 transform rotate-180" />
       </button>
       <h3>Choose a station</h3>
       <button class="invisible">
-        <CaretIcon class="p-0.05em text-black-60 transform rotate-180" />
+        <i-srun-caret class="p-0.05em text-black-60 transform rotate-180" />
       </button>
     </div>
     <div class="mb-0.5em">
-      <div class="mb-1em py-0.75em px-1.25em bg-black-5 rounded-full rounded-0.875em flex justify-between items-center">
+      <div
+        class="mb-1em py-0.75em px-1.25em bg-black-5 rounded-full rounded-0.875em flex justify-between items-center"
+      >
         <p class="text-black-60">Search for route...</p>
-        <SearchIcon class="text-base" />
+        <i-srun-search class="text-base" />
       </div>
       <div class="bg-black-5 h-11.25em rounded-1.25em overflow-scroll">
         <div
@@ -148,18 +164,26 @@ function sortSetUp(by: string): void {
           :class="{ 'bg-blue-25': station.id === input.acStation.id }"
           @click="emits('interaction', 'setting', 'change', station.id)"
         >
-          <div class="py-0.5em mx-1.25em border-b border-b-black-15 flex flex-row items-center">
+          <div
+            class="py-0.5em mx-1.25em border-b border-b-black-15 flex flex-row items-center"
+          >
             <div class="flex items-center justify-center">
               <p>
                 {{ station.label }}
               </p>
             </div>
-            <CheckmarkIcon class="ml-auto text-base" :class="{ invisible: station.id !== input.acStation.id }" />
+            <i-srun-checkmark
+              class="ml-auto text-base"
+              :class="{ invisible: station.id !== input.acStation.id }"
+            />
           </div>
         </div>
       </div>
     </div>
-    <button class="bg-blue-100 text-white rounded-1.375em py-1em" @click="emits('interaction', 'setting', 'save')">
+    <button
+      class="bg-blue-100 text-white rounded-1.375em py-1em"
+      @click="emits('interaction', 'setting', 'save')"
+    >
       <h3>Choose</h3>
     </button>
   </div>
@@ -169,15 +193,22 @@ function sortSetUp(by: string): void {
         class="flex justify-center items-center h-1.75em w-1.75em rounded-full bg-black-5"
         @click="emits('interaction', 'setting', 'cancel')"
       >
-        <CaretIcon class="p-0.05em text-black-60 transform rotate-180" />
+        <i-srun-caret class="p-0.05em text-black-60 transform rotate-180" />
       </button>
       <h3>Change a label</h3>
       <button class="invisible">
-        <CaretIcon class="p-0.05em text-black-60 transform rotate-180" />
+        <i-srun-caret class="p-0.05em text-black-60 transform rotate-180" />
       </button>
     </div>
-    <div class="mb-1em py-0.75em px-1.25em bg-black-5 rounded-full rounded-0.875em flex justify-between items-center">
-      <input v-model="rndVar.label" type="text" class="h-full w-full text-black-60" :placeholder="input.acLabel" />
+    <div
+      class="mb-1em py-0.75em px-1.25em bg-black-5 rounded-full rounded-0.875em flex justify-between items-center"
+    >
+      <input
+        v-model="rndVar.label"
+        type="text"
+        class="h-full w-full text-black-60"
+        :placeholder="input.acLabel"
+      />
     </div>
     <button
       class="bg-blue-100 text-white rounded-1.375em py-1em"

@@ -8,7 +8,9 @@ import AlarmIcon from '~icons/srun/alarm'
       <h4 class="text-black-60">Tips & Tricks</h4>
       <p class="font-light text-blue-100">See more</p>
     </div>
-    <div class="flex flex-row inline-block overflow-x-scroll py-4 border-t border-t-black-5 gap-1em">
+    <div
+      class="flex flex-row inline-block overflow-x-scroll py-4 border-t border-t-black-5 gap-1em"
+    >
       <div>
         <div
           class="stcim1 stcim h-13.875em w-16.875em bg-black-5 flex justify-center items-center rounded-1.375em overflow-hidden bg-center"

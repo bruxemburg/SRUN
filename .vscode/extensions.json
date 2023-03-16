@@ -5,7 +5,8 @@
     "dbaeumer.vscode-eslint",
     "voorjaar.windicss-intellisense",
     "antfu.iconify",
-    "lokalise.i18n-ally"
+    "lokalise.i18n-ally",
+    "GARAIOAG.garaio-vscode-unwanted-recommendations"
   ],
   "unwantedRecommendations": ["vscode.typescript-language-features"] // https://github.com/johnsoncodehk/volar/discussions/471
 }

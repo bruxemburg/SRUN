@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ToggleButton from "./ToggleButton.vue";
 // import router from '~/router'
-import CaretIcon from "~icons/srun/caret";
+// import CaretIcon from "~icons/srun/caret";
 import type { Settings } from "~/composables/alarmModel";
 
 export interface Props {
@@ -23,14 +23,17 @@ const emits = defineEmits<{
     <div class="mt-2em">
       <h1 class="ml-auto mr-auto text-base text-black-60 font-100">General</h1>
       <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
-      <div class="option" @click="emits('interaction', 'setting', 'open', 'route')">
+      <div
+        class="option"
+        @click="emits('interaction', 'setting', 'open', 'route')"
+      >
         <p class="mr-auto ml-0 text-base font-medium">Route</p>
         <div class="ml-auto mr-0 text-black-60 flex items-center">
           <p v-if="settings.general.route.id !== -1" class="font-100 text-sm">
             {{ settings.general.route.label }}
           </p>
           <p v-else class="font-100 text-sm">Choose a route</p>
-          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+          <i-srun-caret class="flex w-1.5em h-1.5em text-black-60" />
         </div>
       </div>
       <div
@@ -44,7 +47,7 @@ const emits = defineEmits<{
             {{ settings.general.station.label }}
           </p>
           <p v-else class="font-100 text-sm">Choose a station/stop</p>
-          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+          <i-srun-caret class="flex w-1.5em h-1.5em text-black-60" />
         </div>
       </div>
       <div class="option">
@@ -53,16 +56,19 @@ const emits = defineEmits<{
           <p class="font-100 text-sm">
             {{ `${Math.abs(settings.general.alarmtime)} minutes` }}
           </p>
-          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+          <i-srun-caret class="flex w-1.5em h-1.5em text-black-60" />
         </div>
       </div>
-      <div class="option" @click="emits('interaction', 'setting', 'open', 'label')">
+      <div
+        class="option"
+        @click="emits('interaction', 'setting', 'open', 'label')"
+      >
         <p class="mr-auto ml-0 text-base font-medium">Label</p>
         <div class="ml-auto mr-0 text-black-60 flex items-center">
           <p class="font-100 text-sm">
             {{ settings.general.label }}
           </p>
-          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+          <i-srun-caret class="flex w-1.5em h-1.5em text-black-60" />
         </div>
       </div>
     </div>
@@ -77,12 +83,15 @@ const emits = defineEmits<{
             <!-- TODO: make a function that will translate it into Peoplish -->
             {{ settings.options.repeat.length === 0 ? "Once" : settings.options.repeat.join(", ") }}
           </p>
-          <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+          <i-srun-caret class="flex w-1.5em h-1.5em text-black-60" />
         </button>
       </div>
       <div class="option">
         <p class="mr-auto ml-0 text-base font-medium">Snooze</p>
-        <ToggleButton :checked="settings.options.snooze" @click="emits('interaction', 'snooze', 'toggle')" />
+        <ToggleButton
+          :checked="settings.options.snooze"
+          @click="emits('interaction', 'snooze', 'toggle')"
+        />
       </div>
       <div v-if="settings.options.snooze">
         <div class="option">
@@ -92,7 +101,7 @@ const emits = defineEmits<{
               <!-- TODO: make a function that will translate it into Peoplish -->
               {{ `${settings.options.snooze_time} minutes` }}
             </p>
-            <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+            <i-srun-caret class="flex w-1.5em h-1.5em text-black-60" />
           </button>
         </div>
       </div>
@@ -102,7 +111,10 @@ const emits = defineEmits<{
       <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
       <div class="option">
         <p class="mr-auto ml-0 text-base font-medium">Play sound</p>
-        <ToggleButton :checked="settings.sound.enabled" @click="emits('interaction', 'sound', 'toggle')" />
+        <ToggleButton
+          :checked="settings.sound.enabled"
+          @click="emits('interaction', 'sound', 'toggle')"
+        />
       </div>
       <div v-if="settings.sound.enabled">
         <div class="option">
@@ -111,7 +123,7 @@ const emits = defineEmits<{
             <p class="font-100 text-sm">
               {{ settings.sound.file.split("/").slice(-1)[0].split(".")[0] }}
             </p>
-            <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+            <i-srun-caret class="flex w-1.5em h-1.5em text-black-60" />
           </button>
         </div>
         <div class="option">
@@ -120,7 +132,9 @@ const emits = defineEmits<{
             <p class="font-100 text-sm">
               {{ settings.sound.volume }}
             </p>
-            <CaretIcon class="flex ml-0.5em w-1.25em h-1.25em text-black-60" />
+            <i-srun-caret
+              class="flex ml-0.5em w-1.25em h-1.25em text-black-60"
+            />
           </button>
         </div>
       </div>
@@ -131,7 +145,10 @@ const emits = defineEmits<{
       <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
       <div class="option">
         <p class="mr-auto ml-0 text-base font-medium">Use vibration</p>
-        <ToggleButton :checked="settings.motion.enabled" @click="emits('interaction', 'motion', 'toggle')" />
+        <ToggleButton
+          :checked="settings.motion.enabled"
+          @click="emits('interaction', 'motion', 'toggle')"
+        />
       </div>
       <div v-if="settings.motion.enabled">
         <div class="option">
@@ -140,7 +157,7 @@ const emits = defineEmits<{
             <p class="font-100 text-sm">
               {{ settings.motion.pattern.label }}
             </p>
-            <CaretIcon class="flex w-1.5em h-1.5em text-black-60" />
+            <i-srun-caret class="flex w-1.5em h-1.5em text-black-60" />
           </button>
         </div>
         <div class="option">
@@ -149,15 +166,22 @@ const emits = defineEmits<{
             <p class="font-100 text-sm">
               {{ settings.motion.intensity }}
             </p>
-            <CaretIcon class="flex ml-0.5em w-1.25em h-1.25em text-black-60" />
+            <i-srun-caret
+              class="flex ml-0.5em w-1.25em h-1.25em text-black-60"
+            />
           </button>
         </div>
       </div>
     </div>
     <div v-if="!newAlarm" class="mt-2em">
-      <h1 class="ml-auto mr-auto text-base text-black-60 font-100">Danger zone</h1>
+      <h1 class="ml-auto mr-auto text-base text-black-60 font-100">
+        Danger zone
+      </h1>
       <div class="mb-1em mt-0.25em w-full h-0.5px bg-black-15" />
-      <div class="option bg-red-25 flex justify-center items-center" @click="emits('interaction', 'alarm', 'delete')">
+      <div
+        class="option bg-red-25 flex justify-center items-center"
+        @click="emits('interaction', 'alarm', 'delete')"
+      >
         <p class="text-red-100 my-0.625em">Delete this alarm</p>
       </div>
     </div>

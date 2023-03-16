@@ -4,8 +4,8 @@ import { ref } from "vue";
 import ToggleButton from "./ToggleButton.vue";
 // import Alarm from '~/composables/alarm-plugin'
 
-import TrashIcon from "~icons/srun/trashbin";
-import CaretIcon from "~icons/srun/caret";
+// import TrashIcon from "~icons/srun/trashbin";
+// import CaretIcon from "~icons/srun/caret";
 import type { Alarm as AlarmModel, Tag } from "~/composables/alarmModel";
 
 export interface Props {
@@ -68,21 +68,25 @@ function checkSortOption(alarm: AlarmModel, by: string): boolean {
             class="rounded-full-22px px-1.5625em py-1.1875em"
             :class="`bg-${alarm.settings.general.image.bg.color}`"
           >
-            <img :src="`./assets/emojis/${alarm.settings.general.image.ico.file}`" alt="" />
+            <img
+              :src="`./assets/emojis/${alarm.settings.general.image.ico.file}`"
+              alt=""
+            />
           </div>
           <div
             v-else
             class="rounded-full-22px px-1.25em py-0.875em bg-red-25"
             @click="emits('interaction', 'alarm', 'delete', alarm.id)"
           >
-            <TrashIcon class="text-red-100 w-2.625em h-2.625em" />
+            <i-srun-trashbin class="text-red-100 w-2.625em h-2.625em" />
           </div>
           <div class="flex flex-col justify-center ml-4">
             <h3 class="font-500">
               {{ alarm.settings.general.route.label }}
             </h3>
             <small class="font-400">
-              {{ alarm.settings.general.label }} • {{ alarm.settings.general.alarmtime }}
+              {{ alarm.settings.general.label }} •
+              {{ alarm.settings.general.alarmtime }}
             </small>
           </div>
           <ToggleButton
@@ -95,7 +99,7 @@ function checkSortOption(alarm: AlarmModel, by: string): boolean {
             <div class="knobs" />
             <div class="layer" />
           </div> -->
-          <CaretIcon
+          <i-srun-caret
             v-else
             class="flex ml-auto w-1.75em h-1.75em"
             @click="emits('interaction', 'alarm', 'edit', alarm.id)"

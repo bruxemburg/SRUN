@@ -11,10 +11,10 @@ const config: CapacitorConfig = {
     // use ipconfig for Windows (literally last field LAN)
     // use ifconfig for MacOS (literally en0 after inet)
     url: 'http://ipv4:4000',
-    cleartext: true,
+    cleartext: true
   },
   hideLogs: false,
-  loggingBehavior: 'production',
+  loggingBehavior: 'production'
 }
 
 export default config
