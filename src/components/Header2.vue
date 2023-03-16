@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 export interface Props {
   newAlarm: boolean;
 }
@@ -9,12 +10,12 @@ const emits = defineEmits<{
 }>();
 
 // const canc = $ref('Cancel')
-let title = $ref("Edit alarm");
-let save = $ref("Save");
+const title = ref("Edit alarm");
+const save = ref("Save");
 
 if (newAlarm) {
-  title = "Add alarm";
-  save = "Create";
+  title.value = "Add alarm";
+  save.value = "Create";
 }
 
 const isInViewport = (element: string) => {
@@ -33,10 +34,10 @@ const isInViewport = (element: string) => {
   return true;
 };
 
-let header = $ref(false);
+const header = ref(false);
 
 window.addEventListener("scroll", () => {
-  header = isInViewport("relative-header-end");
+  header.value = isInViewport("relative-header-end");
 
   const fixedHeader: HTMLElement | null = document.querySelector("#fixed-header");
   if (fixedHeader == null) return;

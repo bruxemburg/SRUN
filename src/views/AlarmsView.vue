@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { type Ref, ref } from "vue";
 // import { Storage } from '@capacitor/storage'
 // import alarmsJson from '../alarms.json'
 import type { PluginResultError } from "@capacitor/core";
@@ -21,7 +22,7 @@ const sortOptions = tagsJson;
 // const firstEl = sortOptions[1]
 // const sortBy = $ref(sortOptions[1]) // this shit does magic
 // console.log(sortOptions[1])
-const sortBy = $ref(JSON.parse(JSON.stringify(tagsJson[0])));
+const sortBy = ref(JSON.parse(JSON.stringify(tagsJson[0])));
 /* const sortOptions = [
   {
     id: 'rec',
@@ -45,19 +46,19 @@ const sortBy = $ref(JSON.parse(JSON.stringify(tagsJson[0])));
   },
 ] */
 const alarmC = new Alarm();
-let alarms: any[] = $ref([]);
+const alarms: Ref<Alarm[]> = ref([]);
 // Storage.remove({ key: 'alarms' }).then(val => alarmC.getAllAlarms().then((val) => { alarms = JSON.parse(JSON.stringify(val)); console.log(alarms) }))
 // [JSON.parse(JSON.stringify(alarmC))]
 // alarms = await alarms[0].getAllAlarms()
 // alarmC.getAllAlarms().then((val) => { alarms = JSON.parse(JSON.stringify(val)) })
 function getAllAlarms(): void {
   alarmC.getAllAlarms().then((val) => {
-    alarms = JSON.parse(JSON.stringify(val));
+    alarms.value = JSON.parse(JSON.stringify(val));
   });
 }
 getAllAlarms();
 
-let alarmToggled = $ref(false);
+const alarmToggled = ref(false);
 
 // console.log(alarms)
 // alarms = $ref(await alarmsJson.map(async(val, key) => await alarms.getAlarm(key)))
@@ -68,11 +69,11 @@ alarms.sort((a, b) => { return a.id - b.id }) */
 function sortSetUp(by: string): void {
   for (let i = 0; i < sortOptions.length; i++) {
     if (sortOptions[i].id === by) {
-      sortBy.id = by;
-      sortBy.label = sortOptions[i].label;
+      sortBy.value.id = by;
+      sortBy.value.label = sortOptions[i].label;
       // made to show enabled/disabled alarms after changing sort option
-      if (alarmToggled) getAllAlarms();
-      alarmToggled = false;
+      if (alarmToggled.value) getAllAlarms();
+      alarmToggled.value = false;
       return;
     }
   }
@@ -84,7 +85,8 @@ function interactions(interactable: string, interaction: string, ...args: any[])
     if (interaction === "edit") {
       const alarmId = args[0];
       if (typeof alarmId !== "number") return console.log("alarmId is not a number");
-      if (!alarms.map((alarm) => alarm.id).includes(alarmId)) return console.log("alarmId is not a valid alarm id");
+      if (!alarms.value.map((alarm) => alarm.id).includes(alarmId))
+        return console.log("alarmId is not a valid alarm id");
       router.push(`/alarm/${alarmId}`);
       // interactableAlarm = alarmId
       // settingsView = true
@@ -94,7 +96,7 @@ function interactions(interactable: string, interaction: string, ...args: any[])
       alarmC.deleteAlarm(args[0]).then(() => getAllAlarms());
     } else if (interaction === "toggle") {
       alarmC.toggleAlarm(args[0]);
-      alarmToggled = true;
+      alarmToggled.value = true;
 
       // temp
       const now = new Date();

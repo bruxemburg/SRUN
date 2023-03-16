@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import { toRaw } from 'vue'
+import { ref } from "vue";
 import transportJson from "../transport.json";
 import SortBar from "./SortBar.vue";
 import CaretIcon from "~icons/srun/caret";
@@ -19,7 +19,7 @@ const emits = defineEmits<{
   (event: "interaction", ibl: string, ion: string, ...args: any[]): void;
 }>();
 
-const rndVar = $ref(input);
+const rndVar = ref(input);
 
 // if (input.acLabel) rndVar = input.acLabel
 

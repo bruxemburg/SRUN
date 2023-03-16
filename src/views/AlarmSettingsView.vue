@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { useRoute } from "vue-router";
 // import alarmsJson from '../alarms.json'
 import Header2 from "../components/Header2.vue";
@@ -14,7 +15,7 @@ import { Alarm, Route, Station, Transport } from "~/composables/alarmModel";
   (event: 'getData', obj: string, ...args: any[]): void
 }>() */
 const alarmC = new Alarm();
-let alarm = $ref(JSON.parse(JSON.stringify(alarmC)));
+const alarm = ref(JSON.parse(JSON.stringify(alarmC)));
 // const alarm = $ref<InstanceType<typeof Alarm> | null>(null)
 
 let newAlarm = false;
@@ -28,7 +29,7 @@ if (idIsNotANumber) {
   // console.log(alarm.value)
   // alarm = await alarm.getAlarm(alarmId)
   alarmC.getAlarm(alarmId).then((val) => {
-    alarm = val;
+    alarm.value = val;
   });
   if (alarmId === -1) newAlarm = true;
   // alarmC.getNewAlarmId().then((val) => { alarm.id = val })
@@ -45,50 +46,51 @@ if (idIsNotANumber) {
   // console.log(alarm.value.enabled)
 }
 
-let settingType = $ref("");
-let showSetting = $ref(false);
-const settingInput = $ref({} as any);
+const settingType = ref("");
+const showSetting = ref(false);
+const settingInput = ref({} as any);
 
 function changeSettings(ibl: string, ion: string, ...args: any[]) {
   if (ibl === "setting") {
     if (ion === "cancel") {
-      showSetting = false;
+      showSetting.value = false;
     } else if (ion === "open") {
-      settingType = args[0];
-      if (settingType === "route") {
-        settingInput.sortBy = new Transport(alarm.settings.general.route.transport.id);
-        settingInput.acRoute = JSON.parse(JSON.stringify(alarm.settings.general.route));
-        settingInput.routes = alarmC.settings.getAllRoutes(settingInput.sortBy.id);
-      } else if (settingType === "station") {
-        settingInput.acStation = JSON.parse(JSON.stringify(alarm.settings.general.station));
-        settingInput.stations = alarmC.settings.getAllStations(alarm.settings.general.route.id);
-      } else if (settingType === "label") {
-        settingInput.acLabel = alarm.settings.general.label;
+      settingType.value = args[0];
+      if (settingType.value === "route") {
+        settingInput.value.sortBy = new Transport(alarm.value.settings.general.route.transport.id);
+        settingInput.value.acRoute = JSON.parse(JSON.stringify(alarm.value.settings.general.route));
+        settingInput.value.routes = alarmC.settings.getAllRoutes(settingInput.value.sortBy.id);
+      } else if (settingType.value === "station") {
+        settingInput.value.acStation = JSON.parse(JSON.stringify(alarm.value.settings.general.station));
+        settingInput.value.stations = alarmC.settings.getAllStations(alarm.value.settings.general.route.id);
+      } else if (settingType.value === "label") {
+        settingInput.value.acLabel = alarm.value.settings.general.label;
       }
-      showSetting = true;
+      showSetting.value = true;
     } else if (ion === "save") {
-      if (settingType === "route") {
-        if (alarm.settings.general.route.id !== settingInput.acRoute.id) {
-          alarm.settings.general.route = settingInput.acRoute;
-          alarm.settings.general.station = new Station();
+      if (settingType.value === "route") {
+        if (alarm.value.settings.general.route.id !== settingInput.value.acRoute.id) {
+          alarm.value.settings.general.route = settingInput.value.acRoute;
+          alarm.value.settings.general.station = new Station();
         }
-      } else if (settingType === "station") {
-        if (alarm.settings.general.station.id !== settingInput.acStation.id)
-          alarm.settings.general.station = settingInput.acStation;
-      } else if (settingType === "label") {
-        if (alarm.settings.general.label !== args[0] && args[0] !== "") alarm.settings.general.label = args[0];
+      } else if (settingType.value === "station") {
+        if (alarm.value.settings.general.station.id !== settingInput.value.acStation.id)
+          alarm.value.settings.general.station = settingInput.value.acStation;
+      } else if (settingType.value === "label") {
+        if (alarm.value.settings.general.label !== args[0] && args[0] !== "")
+          alarm.value.settings.general.label = args[0];
       }
-      settingType = "";
-      showSetting = false;
+      settingType.value = "";
+      showSetting.value = false;
     } else if (ion === "sort") {
-      if (settingType === "route") {
-        settingInput.sortBy = new Transport(args[0]);
-        settingInput.routes = alarmC.settings.getAllRoutes(settingInput.sortBy.id);
+      if (settingType.value === "route") {
+        settingInput.value.sortBy = new Transport(args[0]);
+        settingInput.value.routes = alarmC.settings.getAllRoutes(settingInput.value.sortBy.id);
       }
     } else if (ion === "change") {
-      if (settingType === "route") settingInput.acRoute = new Route(args[0]);
-      else if (settingType === "station") settingInput.acStation = new Station(args[0]);
-      else if (settingType === "label") settingInput.acLabel = args[0];
+      if (settingType.value === "route") settingInput.value.acRoute = new Route(args[0]);
+      else if (settingType.value === "station") settingInput.value.acStation = new Station(args[0]);
+      else if (settingType.value === "label") settingInput.value.acLabel = args[0];
     }
   } else if (ibl === "alarm") {
     if (ion === "cancel") {
@@ -97,18 +99,18 @@ function changeSettings(ibl: string, ion: string, ...args: any[]) {
       // console.log(alarm)
       /* if(newAlarm) alarmC.saveAlarm(alarm)
       else */
-      alarmC.saveAlarm(alarm);
+      alarmC.saveAlarm(alarm.value);
       router.push("/alarms");
     } else if (ion === "delete") {
-      alarmC.deleteAlarm(alarm.id);
+      alarmC.deleteAlarm(alarm.value.id);
       router.push("/alarms");
     }
   } else if (ibl === "snooze") {
-    if (ion === "toggle") alarm.settings.options.snooze = !alarm.settings.options.snooze;
+    if (ion === "toggle") alarm.value.settings.options.snooze = !alarm.value.settings.options.snooze;
   } else if (ibl === "sound") {
-    if (ion === "toggle") alarm.settings.sound.enabled = !alarm.settings.sound.enabled;
+    if (ion === "toggle") alarm.value.settings.sound.enabled = !alarm.value.settings.sound.enabled;
   } else if (ibl === "motion") {
-    if (ion === "toggle") alarm.settings.motion.enabled = !alarm.settings.motion.enabled;
+    if (ion === "toggle") alarm.value.settings.motion.enabled = !alarm.value.settings.motion.enabled;
   }
   /* else if (ibl === 'transport') {
     if (ion === 'change') {

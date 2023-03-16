@@ -31,6 +31,4 @@ coverage
 
 # capacitor
 /capacitor.config.ts
-/android
-/ios
 
