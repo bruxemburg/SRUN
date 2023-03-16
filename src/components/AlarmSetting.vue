@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import transportJson from "../transport.json";
-import SortBar from "./SortBar.vue";
+// import SortBar from "./SortBar.vue";
 // import CaretIcon from "~icons/srun/caret";
 // import SearchIcon from "~icons/srun/search";
 // import CheckmarkIcon from "~icons/srun/checkmark";

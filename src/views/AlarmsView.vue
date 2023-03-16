@@ -4,13 +4,13 @@ import { type Ref, ref } from "vue";
 // import alarmsJson from '../alarms.json'
 import type { PluginResultError } from "@capacitor/core";
 import tagsJson from "../tags.json";
-import Header from "~/components/Header.vue";
-import Footer from "~/components/TabBar.vue";
-import SortBar from "~/components/SortBar.vue";
-import Alarms from "~/components/Alarms.vue";
+// import Header from "~/components/Header.vue";
+// import Footer from "~/components/TabBar.vue";
+// import SortBar from "~/components/SortBar.vue";
+// import Alarms from "~/components/Alarms.vue";
 import router from "~/router";
 import { Alarm } from "~/composables/alarmModel";
-import TipsAndTricks from "~/components/TipsAndTricks.vue";
+// import TipsAndTricks from "~/components/TipsAndTricks.vue";
 import { Alarm as AlarmPlugin } from "~/composables/alarm-plugin";
 
 // import AlarmSettings from '~/components/AlarmSettings.vue'
@@ -137,5 +137,5 @@ function interactions(interactable: string, interaction: string, ...args: any[])
     <TipsAndTricks class="mb-6em" />
   </main>
 
-  <Footer />
+  <TabBar />
 </template>

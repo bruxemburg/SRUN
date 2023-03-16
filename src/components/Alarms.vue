@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 // import type { PluginResultError } from '@capacitor/core'
-import ToggleButton from "./ToggleButton.vue";
+// import ToggleButton from "./ToggleButton.vue";
 // import Alarm from '~/composables/alarm-plugin'
 
 // import TrashIcon from "~icons/srun/trashbin";
