@@ -1,12 +1,12 @@
 {
-  "recommendations": 
-  [
-    "antfu.vite",
-    "johnsoncodehk.volar", 
-    "johnsoncodehk.vscode-typescript-vue-plugin",
-    "lokalise.i18n-ally",
-    "antfu.iconify",
+  "recommendations": [
+    "Vue.volar",
+    "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "voorjaar.windicss-intellisense",
-  ]
+    "antfu.iconify",
+    "lokalise.i18n-ally",
+    "GARAIOAG.garaio-vscode-unwanted-recommendations"
+  ],
+  "unwantedRecommendations": ["vscode.typescript-language-features"] // https://github.com/johnsoncodehk/volar/discussions/471
 }

@@ -13,6 +13,7 @@ dist
 dist-ssr
 coverage
 *.local
+.history
 
 /cypress/videos/
 /cypress/screenshots/
@@ -28,4 +29,6 @@ coverage
 *.sln
 *.sw?
 
+# capacitor
 /capacitor.config.ts
+

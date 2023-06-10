@@ -8,7 +8,10 @@
 }
 
 body {
-  font-family: 'Euclid Circular A', ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: 'Euclid Circular A', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
   font-size: 3.8647342995169085vw;
 
   transition: color 0.5s, background-color 0.5s;
@@ -23,7 +26,7 @@ body {
   /*max-width: 544px;*/
 }
 
-header{
+header {
   @apply bg-white dark:bg-black-100;
 }
 
@@ -43,7 +46,7 @@ footer {
 #fixed-header {
   /*transform: translateY(-1em);*/
   opacity: 0;
-  transition: opacity .15s ease-in-out;
+  transition: opacity 0.15s ease-in-out;
 }
 
 h1 {
@@ -105,7 +108,7 @@ small {
 }
 
 /* toggle button */
-.toggle .knobs{
+.toggle .knobs {
   @apply rounded-full h-full w-1.125em relative;
 }
 
@@ -116,7 +119,7 @@ small {
   top: 2px;
   background-color: white;
   z-index: 1;
-  transition: 0.8s ease all, left .3s cubic-bezier(0.2, 1.35, 0.2, 1.35);
+  transition: 0.8s ease all, left 0.3s cubic-bezier(0.2, 1.35, 0.2, 1.35);
   height: 1.375em;
   width: 1.375em;
   @apply rounded-full;
@@ -132,11 +135,11 @@ small {
   left: calc(100% - 2px);
 }
 
-.toggle .layer{
+.toggle .layer {
   @apply absolute w-full h-full rounded-full;
 }
 
-.toggle .layer::before{
+.toggle .layer::before {
   content: '';
   position: absolute;
   z-index: 0;
@@ -144,7 +147,7 @@ small {
   transition: all ease 0.3s;
 }
 
-.toggle .checkbox:checked ~ .layer::before{
+.toggle .checkbox:checked ~ .layer::before {
   @apply bg-green-100;
 }
 

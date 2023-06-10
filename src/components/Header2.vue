@@ -1,49 +1,48 @@
 <script setup lang="ts">
+import { ref } from "vue";
+export interface Props {
+  newAlarm: boolean;
+}
+const { newAlarm = false } = defineProps<Props>();
 
 const emits = defineEmits<{
-  (event: 'interaction', ibl: string, ion: string, ...args: any[]): void
-}>()
-
-interface Props {
-  newAlarm: boolean
-}
-const {
-  newAlarm = false,
-} = defineProps<Props>()
+  (event: "interaction", ibl: string, ion: string, ...args: any[]): void;
+}>();
 
 // const canc = $ref('Cancel')
-let title = $ref('Edit alarm')
-let save = $ref('Save')
+const title = ref("Edit alarm");
+const save = ref("Save");
 
 if (newAlarm) {
-  title = 'Add alarm'
-  save = 'Create'
+  title.value = "Add alarm";
+  save.value = "Create";
 }
 
 const isInViewport = (element: string) => {
   // const e = element.getBoundingClientRect()
-  const e = document.querySelector(`#${element}`)?.getBoundingClientRect()
+  const e = document.querySelector(`#${element}`)?.getBoundingClientRect();
 
-  if (e == null)
-    return false
+  if (e == null) return false;
 
-  if (e.top >= 0 && e.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-  /* && e.left >= 0 && e.right <= (window.innerWidth || document.documentElement.clientWidth) */)
-    return false
+  if (
+    e.top >= 0 &&
+    e.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    /* && e.left >= 0 && e.right <= (window.innerWidth || document.documentElement.clientWidth) */
+  )
+    return false;
 
-  return true
-}
+  return true;
+};
 
-let header = $ref(false)
+const header = ref(false);
 
-window.addEventListener('scroll', () => {
-  header = isInViewport('relative-header-end')
+window.addEventListener("scroll", () => {
+  header.value = isInViewport("relative-header-end");
 
-  const fixedHeader: HTMLElement | null = document.querySelector('#fixed-header')
-  if (fixedHeader == null)
-    return
+  const fixedHeader: HTMLElement | null = document.querySelector("#fixed-header");
+  if (fixedHeader == null) return;
 
-  const state = fixedHeader.getAttribute('data-animation-state')
+  const state = fixedHeader.getAttribute("data-animation-state");
 
   /* const tl = gsap.timeline({ paused: true })
   tl.to(fixedHeader, {
@@ -52,32 +51,36 @@ window.addEventListener('scroll', () => {
     ease: Power2.easeInOut,
   }) */
 
-  if (state === 'show') {
+  if (state === "show") {
     // show anima
-    fixedHeader.style.opacity = '1'
-  }
-  else if (state === 'hide') {
+    fixedHeader.style.opacity = "1";
+  } else if (state === "hide") {
     // hide anima
-    fixedHeader.style.opacity = '0'
+    fixedHeader.style.opacity = "0";
   }
-})
-
+});
 </script>
 
 <template>
   <header>
     <div id="relative-header" class="relative">
-      <div class="flex flex-row items-center w-full mt-2em p-1em pb-0.5em justify-between">
+      <div
+        class="flex flex-row items-center w-full mt-2em p-1em pb-0.5em justify-between"
+      >
         <div class="container-blur" />
-        <button class="text-blue-100 text-sm" @click="emits('interaction', 'alarm', 'cancel')">
-          <p class="font-100">
-            Cancel
-          </p>
+        <button
+          class="text-blue-100 text-sm"
+          @click="emits('interaction', 'alarm', 'cancel')"
+        >
+          <p class="font-100">Cancel</p>
         </button>
         <h1 class="text-lg font-400">
           {{ title }}
         </h1>
-        <button class=" text-blue-100 text-sm" @click="emits('interaction', 'alarm', 'save')">
+        <button
+          class="text-blue-100 text-sm"
+          @click="emits('interaction', 'alarm', 'save')"
+        >
           <p class="font-100">
             {{ save }}
           </p>
@@ -91,17 +94,23 @@ window.addEventListener('scroll', () => {
       :data-animation-state="header ? 'show' : 'hide'"
       class="fixed top-0 left-0 w-full"
     >
-      <div class="flex flex-row items-center w-full p-1em pb-0.25em gap-x-4em justify-between mt-1em">
+      <div
+        class="flex flex-row items-center w-full p-1em pb-0.25em gap-x-4em justify-between mt-1em"
+      >
         <div class="container-blur" />
-        <button class="text-blue-100 text-sm" @click="emits('interaction', 'alarm', 'cancel')">
-          <p class="font-100">
-            Cancel
-          </p>
+        <button
+          class="text-blue-100 text-sm"
+          @click="emits('interaction', 'alarm', 'cancel')"
+        >
+          <p class="font-100">Cancel</p>
         </button>
         <h1 class="text-lg font-400">
           {{ title }}
         </h1>
-        <button class="text-blue-100 text-sm" @click="emits('interaction', 'alarm', 'save')">
+        <button
+          class="text-blue-100 text-sm"
+          @click="emits('interaction', 'alarm', 'save')"
+        >
           <p class="font-100">
             {{ save }}
           </p>
