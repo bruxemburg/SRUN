@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { type Ref, ref } from "vue";
+
 // import { Storage } from '@capacitor/storage'
 // import alarmsJson from '../alarms.json'
 import type { PluginResultError } from "@capacitor/core";
 import tagsJson from "../tags.json";
+
 // import Header from "~/components/Header.vue";
 // import Footer from "~/components/TabBar.vue";
 // import SortBar from "~/components/SortBar.vue";
 // import Alarms from "~/components/Alarms.vue";
 import router from "~/router";
 import { Alarm } from "~/composables/alarmModel";
+
 // import TipsAndTricks from "~/components/TipsAndTricks.vue";
 import { Alarm as AlarmPlugin } from "~/composables/alarm-plugin";
 
@@ -135,6 +138,7 @@ function interactions(interactable: string, interaction: string, ...args: any[])
       @interaction="interactions"
     />
     <TipsAndTricks class="mb-6em" />
+    <TestArea />
   </main>
 
   <TabBar />

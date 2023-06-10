@@ -14,7 +14,6 @@ declare module '@vue/runtime-core' {
     AlarmSettings: typeof import('./src/components/AlarmSettings.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Header2: typeof import('./src/components/Header2.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Hint: typeof import('./src/components/Hint.vue')['default']
     ISrunAlarm: typeof import('~icons/srun/alarm')['default']
     ISrunBulb: typeof import('~icons/srun/bulb')['default']
@@ -28,9 +27,8 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SortBar: typeof import('./src/components/SortBar.vue')['default']
     TabBar: typeof import('./src/components/TabBar.vue')['default']
-    TheWelcome: typeof import('./src/components/TheWelcome.vue')['default']
+    TestArea: typeof import('./src/components/TestArea.vue')['default']
     TipsAndTricks: typeof import('./src/components/TipsAndTricks.vue')['default']
     ToggleButton: typeof import('./src/components/ToggleButton.vue')['default']
-    WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
   }
 }

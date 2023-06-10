@@ -1,6 +1,7 @@
 /* eslint-disable no-cond-assign */
 // import { ExceptionCode } from '@capacitor/core'
 import { Preferences as Storage } from '@capacitor/preferences'
+
 // import alarmsJson from '../alarms.json'
 import routesJson from '../routes.json'
 import stationsJson from '../stations.json'
@@ -34,7 +35,7 @@ class Alarm {
       // if (!alarms.value) throw new Error('No alarms found')
       if (!alarms.value) return undefined
       // console.log(alarms)
-      const alarm = JSON.parse(alarms.value).find((alarm) => {
+      const alarm = JSON.parse(alarms.value).find((alarm: Alarm) => {
         return alarm.id === id
       })
       // JSON.parse(JSON.stringify()) is used to clone the object, used as a fast fix of vue reactvity
@@ -44,7 +45,7 @@ class Alarm {
         this.id = id
         this.enabled = alarm.enabled
         // console.log(alarm)
-        this.tags = alarm.tags.map((tag) => new Tag(tag))
+        this.tags = alarm.tags.map((tag: string) => new Tag(tag))
         alarm.settings.general.route = new Route(alarm.settings.general.route)
         alarm.settings.general.station = new Station(
           alarm.settings.general.station
@@ -69,7 +70,7 @@ class Alarm {
     // const asyncMap = alarmsJson.map(async(alarm) => { (alarm as any) = await this.getAlarm(alarm.id); return alarm as Alarm })
     const asyncMap = await Storage.get({ key: 'alarms' }).then((alarms) => {
       if (alarms.value)
-        return JSON.parse(alarms.value).map(async (alarm) => {
+        return JSON.parse(alarms.value).map(async (alarm: Alarm) => {
           ;(alarm as any) = await this.getAlarm(alarm.id)
           return alarm as Alarm
         })
@@ -142,7 +143,7 @@ class Alarm {
       let input = alarms.value ? alarms.value : ''
       if (input)
         input = JSON.stringify(
-          JSON.parse(input).filter((alarm) => {
+          JSON.parse(input).filter((alarm: Alarm) => {
             return alarm.id !== id
           })
         )
@@ -154,7 +155,7 @@ class Alarm {
     return await Storage.get({ key: 'alarms' }).then((alarms) => {
       let i = 0
       if (alarms.value) {
-        const ids = JSON.parse(alarms.value).map((alarm) => {
+        const ids = JSON.parse(alarms.value).map((alarm: Alarm) => {
           return alarm.id
         })
         while (ids.includes(i)) i++
@@ -168,7 +169,7 @@ class Alarm {
       let input = alarms.value ? alarms.value : ''
       if (input)
         input = JSON.stringify(
-          JSON.parse(input).map((alarm) => {
+          JSON.parse(input).map((alarm: Alarm) => {
             if (alarm.id === id) alarm.enabled = !alarm.enabled
             return alarm
           })

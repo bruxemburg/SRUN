@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRoute } from "vue-router";
+
 // import alarmsJson from '../alarms.json'
 // import Header2 from "../components/Header2.vue";
 // import AlarmSettings from "~/components/AlarmSettings.vue";
 // import AlarmSetting from "~/components/AlarmSetting.vue";
 import router from "~/router";
+
 // import TabBar from "~/components/TabBar.vue";
 // import type { Settings } from '~/composables/alarmModel.ts'
 // import { Settings, Transport } from '~/composables/alarmModel'

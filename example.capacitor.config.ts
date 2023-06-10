@@ -4,7 +4,6 @@ const config: CapacitorConfig = {
   appId: 'com.bruxemburg.srun',
   appName: 'SRUN',
   webDir: 'dist',
-  bundledWebRuntime: false,
   // disable server in order to use build files
   server: {
     // change to current workstation IPv4
@@ -13,8 +12,12 @@ const config: CapacitorConfig = {
     url: 'http://ipv4:4000',
     cleartext: true
   },
-  hideLogs: false,
-  loggingBehavior: 'production'
+  loggingBehavior: 'production',
+  plugins: {
+    CapacitorHttp: {
+      enabled: true
+    }
+  }
 }
 
 export default config
